@@ -1,1 +1,2 @@
-# Info_Theory
+# Notes on Information Theory
+

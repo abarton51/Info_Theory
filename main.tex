@@ -249,7 +249,7 @@ As we discussed earlier, the true probability mass function is typically assumed
     -y\log q - (1 - y)\log (1 - q) = -y\log q(y) - (1-y)\log(1 - q(y))
 \end{gather*}
 Where we used the fact that $q(x_1) = q(y)$. This is typically how you will see it written in articles and tutorials online. Remember, this is for one single sample. This equation is what will typically be used as our loss function.
-\definition \textbf{The Binary Cross Entropy Cost Function} Let $C = [C_1\ldots C_m]^T\in \R^{m\times 1}$ where each $C_i$ is a random variable supported on $\{x_1, x_2\}$ given a parameter $d_i\in \R^{1\times n}$, where $n\in \mathbb{Z^+}$. The binary cross entropy cost of $Y$ is,
+\definition \textbf{The Binary Cross Entropy Cost Function} Let $C = [C_1\ldots C_m]^T\in \R^{m}$ where each $C_i$ is a random variable supported on $\{x_1, x_2\}$ given a parameter $d_i\in \R^{1\times n}$, where $n\in \mathbb{Z^+}$. The binary cross entropy cost of $Y$ is,
 \begin{gather*}
     -\frac{1}{m}\sum_{i=1}^m \Big[p(C_i = x_1|d_i)\log q(C_i = x_1|d_i) + p(C_i = x_2|d_i)\log q(C_i = x_2|d_i)\Big]
 \end{gather*}
@@ -294,10 +294,9 @@ That's everything you would need to know in order to understand the underlying t
 %\section*{Acknowledgments}
 
 %bib
-\bibliography{bibliography}
-
-The Bird Image dataset source: https://www.kaggle.com/datasets/gpiosenka/100-bird-species 
-
-\bibliographystyle{apalike}
+\begin{thebibliography}{2}
+    \bibitem{textbook} Cover, T. M., \&; Thomas, J. A. (2010). Elements of information theory. Wiley-India. 
+    \bibitem{textbook} Goodfellow, I., Bengio, Y., \&; Courville, A. (2023). Deep learning. Alanna Maldonado. 
+\end{thebibliography}
 
 \end{document}

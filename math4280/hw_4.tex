@@ -1,0 +1,292 @@
+\documentclass[10pt,twoside]{article}
+\usepackage{amssymb, amsmath, amsthm, amsfonts, epsfig, graphicx, dsfont,
+  bbm, bbold, url, color, setspace, multirow, pinlabel}
+\usepackage[all]{xy}
+
+\usepackage{fancyhdr} \setlength{\voffset}{-1in}
+\setlength{\topmargin}{0in} \setlength{\textheight}{9.5in}
+\setlength{\textwidth}{6.5in} \setlength{\hoffset}{0in}
+\setlength{\oddsidemargin}{0in} \setlength{\evensidemargin}{0in}
+\setlength{\marginparsep}{0in} \setlength{\marginparwidth}{0in}
+\setlength{\headsep}{0.25in} \setlength{\headheight}{0.5in}
+\pagestyle{fancy}
+
+\input{macros}
+
+\newcommand{\Pro}{\ensuremath{\mathbb{P}}}
+\newcommand{\condPro}[2]{\ensuremath{\mathbb{P}}(#1 $|$ #2)}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+
+\onehalfspace
+
+\fancyhead[LO,LE]{{MATH 4280 - Information Theory - Professor Wang} \fancyhead[RO,RE]{Due 03/24/2023 at 11:59 pm}}
+\chead{\textbf{}} \cfoot{}
+\fancyfoot[LO,LE]{} \fancyfoot[RO,RE]{Page \thepage\ of
+  \pageref{LastPage}} \renewcommand{\footrulewidth}{0.5pt}
+\parindent 0in
+% ------------------------------------------------------%
+% -------------------Begin Document---------------------%
+% ------------------------------------------------------%
+\begin{document}
+
+\begin{center}
+\huge{\bf{Homework 4} - Austin Barton}
+\end{center}
+
+\medskip
+
+\noindent \large{\textbf{Collaborators: N/A}}
+
+\medskip
+
+\begin{itemize}
+    \item\textbf{Problem 1:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    An $n\times n$ matrix $P = [P_{ij}]$ is said to be doubly stochastic if $P_{ij}\geq 0$ and $\sum_{j}P_{ij} = 1$ for all $i\in [n]$ and $\sum_{i}P_{ij} = 1$ for all $j\in [n]$. An $n\times n$ matrix $P$ is said to be a permutation matrix if it is doubly stochastic and there is precisely one $P_{ij} = 1$ in each row and each column. It can be shown that every doubly stochastic matrix can be written as the convex combination of permutation matrices.
+    \begin{enumerate}
+        \item Let $\mathbf{a}^t = (a_1, a_2, \ldots, a_n)$ be a probability vector, and let $\mathbf{b} = \mathbf{a}P$, where $P$ is doubly stochastic. Show that $\mathbf{b}$ is a probability vector and that 
+        \begin{gather*}
+            H(b_1, b_2, \ldots, b_n)\geq H(a_1, a_2, \ldots, a_n)
+        \end{gather*}
+        \item Show that a stationary distribution $\mu$ for a doubly stochastic matrix $P$ is the uniform distribution.
+        \item Conversely, prove that if the uniform distribution is a stationary distribution for a Markov transition matrix $P$, then $P$ is doubly stochastic.
+    \end{enumerate}
+    \begin{proof}[Answers.]
+    \begin{enumerate}
+        \item \begin{proof}[Answer.]
+            First, to show $\mathbf{b}$ is a probability vector. Consider,
+            \begin{gather*}
+                (\mathbf{a}P)_j = b_j = \sum_{i=1}^n a_iP_{ij}
+            \end{gather*}
+            For $j=1,\ldots, n$. But \begin{gather*}
+                \sum_{j=1}^n b_j = \sum_{j=1}^n   \sum_{i=1}^n a_iP_{ij} = \sum_{i=1}^n\sum_{j=1}^n a_iP_{ij} \\
+                = \sum_{i=1}^na_i\sum_{j=1}^nP_{ij} = \sum_{i=1}^na_i = 1
+            \end{gather*}
+            Since $P$ is doubly stochastic and $\mathbf{a}$ is a probability vector. Thus, $\mathbf{b}$ is a probability vector. Now, to show that $H(\mathbf{b})\geq H(\mathbf{a})$. Consider, 
+            \begin{gather*}
+                H(\mathbf{b}) - H(\mathbf{a}) = H(b_1,\ldots, b_n) - H(a_1, \ldots, a_n) \\
+                = -\sum_{j=1}^n b_j\log b_j + \sum_{i=1}^n a_i\log a_i
+            \end{gather*}
+            We know each $b_j = \sum_{i=1}^n a_iP_{ij}$. So,
+            \begin{gather*}
+                -\sum_{j=1}^n b_j\log b_j + \sum_{i=1}^n a_i\log a_i = -\sum_{j=1}^n\sum_{i=1}^n a_iP_{ij}\log \sum_{i'=1}^n a_{i'}P_{i'j} + \sum_{i=1}^n a_i \log a_i \\
+                = \sum_{i=1}^n \sum_{j=1}^n a_iP_{ij}\log \frac{a_i}{\sum_{i'=1}^n a_{i'}P_{i'j}} = \sum_{i=1}^n \sum_{j=1}^n a_iP_{ij}\log \frac{a_i}{b_j}
+            \end{gather*}
+            Now, using the log-sum inequality from Chapter 2,
+            \begin{gather*}
+                \sum_{i=1}^n \sum_{j=1}^n a_iP_{ij}\log \frac{a_i}{b_j} \geq \Big(\sum_{j=1}^n\sum_{i=1}^n a_iP_{ij} \Big) \log \frac{\sum_{j=1}^n\sum_{i=1}^n a_i}{\sum_{j=1}^n\sum_{i=1}^n b_j} \\
+                = \Big(\sum_{j=1}^n\sum_{i=1}^n a_iP_{ij} \Big) \log \frac{\sum_{j=1}^n\sum_{i=1}^n a_i}{\sum_{i=1}^n\sum_{j=1}^nb_j} \\
+                = \Big(\sum_{j=1}^n\sum_{i=1}^n a_iP_{ij} \Big) \log \frac{\sum_{j=1}^n 1}{\sum_{i=1}^n 1} =  \Big(\sum_{j=1}^n\sum_{i=1}^n a_iP_{ij} \Big)\log \frac{n}{n} = \Big(\sum_{j=1}^n\sum_{i=1}^n a_iP_{ij} \Big)\log 1 = 0
+            \end{gather*}
+            Thus, 
+            \begin{gather*}
+                H(b_1, \ldots, b_n) \geq H(a_1, \ldots, a_n)
+            \end{gather*}
+        \end{proof}
+        \item \begin{proof}[Answer.]
+            We want to show that $\mu = (\mu_1, \ldots, \mu_n) = (\frac{1}{n}, \ldots, \frac{1}{n})$
+            \iffalse
+            \begin{gather*}
+                \mu = 
+                \begin{bmatrix}
+                    \mu_1 \\
+                    \vdots \\
+                    \mu_n
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                \frac{1}{n} \\
+                \vdots \\
+                \frac{1}{n}
+                \end{bmatrix}
+            \end{gather*}
+            \fi
+            is a stationary distribution for a doubly stochastic matrix $P$. Let $P = [P_1 \ldots P_n]$ where each $P_j$ for $j=1,\ldots, n$ is the $j^{th}$ column vector of $P$. Consider, 
+            \begin{gather*}
+                \mu P = \mu[P_1 \ldots P_n] = [\mu P_1\ldots, \mu P_n] 
+            \end{gather*}
+            And so for each $i=1,\ldots, n$,
+            \begin{gather*}
+                (\mu P)_i = \sum_{j=1}^n\mu_i P_j =  \mu_i\sum_{j=1}^n P_j = \mu_i(1) = \mu_i
+            \end{gather*}
+            Thus, the uniform distribution is a stationary distribution for a doubly stochastic matrix $P$.
+        \end{proof}
+        \item \begin{proof}[Answer.]
+            Let $\mu$ be a uniform distribution that is a stationary distribution for a Markov transition matrix $P$. We want to show that $P$ is doubly stochastic.\smallskip
+
+            Since $P$ is a Markov transition matrix, we know that each $P_{ij}\geq 0$ and $\sum_{j=1}^n P_{ij} = 1$.
+
+            Consider, 
+            \begin{gather*}
+                \mu P = 
+                \mu
+                [P_1 \ldots P_n] = [\mu P_1 \ldots \mu P_n]
+            \end{gather*}
+            
+            Each $j^{th}$ column of $\mu P$ is
+            \begin{gather*}
+                (\mu P)_j = \sum_{i=1}^n \mu_j P_{i j} = \mu_j
+            \end{gather*}
+            since $\mu$ is a stationary distribution. Since $\mu$ is a uniform distribution, this is,
+            \begin{gather*}
+                \mu_j = \frac{1}{n}
+            \end{gather*}
+            Thus, 
+            \begin{gather*}
+                \frac{1}{n}\sum_{i=1}^n P_{ij} = \frac{1}{n} \\
+                \Rightarrow \sum_{i=1}^n P_{ij} = 1
+            \end{gather*}
+            Therefore, for each $j=1,\ldots, n$, we have that,
+            \begin{gather*}
+                \sum_{i=1}^n P_{ij} = 1
+            \end{gather*}
+           Therefore, $P$ is a doubly stochastic matrix by definition.
+            
+            
+        \end{proof}
+
+        
+    \end{enumerate}
+    \end{proof}
+    
+    \item\textbf{Problem 2:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer to part a).]
+    Consider, 
+    \begin{gather*}
+        \frac{H(X_1, \ldots, X_n)}{n} = \frac{\sum_{i=1}^n H(X_i|X_{i-1}, \ldots, X_1)}{n} \\
+        = \frac{H(X_n|X_{n-1}, \ldots, X_1) + \sum_{i=1}^{n-1} H(X_{i}|X_{i-1}, \ldots, X_1)}{n}
+    \end{gather*}
+    by the chain rule for entropy. By the chain rule again we have,
+    \begin{gather*}
+        = \frac{H(X_n|X_{n-1},\ldots, X_1) + H(X_1, \ldots, X_{n-1})}{n}
+    \end{gather*}
+    Since this is a stationary stochastic process, we know that $H(X_n|X_{n-1}, \ldots, X_1)$ is non-increasing in $n$. That is, for each $i = 1, \ldots, n$,
+    \begin{gather*}
+        H(X_n|X_{n-1}, \ldots, X_1) \leq H(X_{i}|X_{i-1
+        }, \ldots, X_1)
+    \end{gather*}
+    So then,
+    \begin{gather*}
+        H(X_n|X_{n-1}, \ldots, X_1) \leq \frac{\sum_{i=1}^{n-1}H(X_{i}|X_{i-1}, \ldots, X_1)}{n-1}
+    \end{gather*}
+    since the right hand side is averaged over terms that are all greater than or equal to the left hand side. Thus, by the chain rule for entropy in the numerator of the right hand side,
+    \begin{gather*}
+        H(X_n|X_{n-1}, \ldots, X_1)\leq \frac{H(X_1, \ldots, X_{n-1})}{n-1}
+    \end{gather*}
+    So, we have that 
+    \begin{gather*}
+         \frac{H(X_1, \ldots, X_n)}{n} = \frac{H(X_n|X_{n-1},\ldots, X_1) + H(X_1, \ldots, X_{n-1})}{n} \\
+         \text{and} \\
+         H(X_n|X_{n-1}, \ldots, X_1) \leq \frac{H(X_1, \ldots, X_{n-1})}{n-1}
+    \end{gather*}
+    Thus, 
+    \begin{gather*}
+        \frac{H(X_1, \ldots, X_n)}{n} \leq \frac{\frac{1}{n-1}H(X_1, \ldots, X_{n-1}) + H(X_1, \ldots, X_{n-1})}{n} \\
+        = \frac{H(X_1, \ldots, X_{n-1}) + (n-1)H(X_1, \ldots, X_{n-1})}{n(n-1)} = \frac{nH(X_1, \ldots, X_{n-1})}{n(n-1)} \\
+        = \frac{H(X_1, \ldots, X_{n-1})}{n-1}
+    \end{gather*}
+    That is, 
+    \begin{gather*}
+        \frac{H(X_1, \ldots, X_n)}{n} \leq \frac{H(X_1, \ldots, X_{n-1})}{n-1}
+    \end{gather*}
+    Thus, it has been shown.
+    \end{proof}
+    \begin{proof}[Answer to part b)]
+        For each $i=1, \ldots, n$, since this is a stationary stochastic process, we have that,
+        \begin{gather*}
+            H(X_n|X_{n-1}, \ldots, X_1) \leq H(X_i|X_{i-1}, \ldots, X_1)
+        \end{gather*}
+        Then the mean 
+        \begin{gather*}
+            \frac{\sum_{i=1}H(X_i|X_{i-1}, \ldots, X_1)}{n}
+        \end{gather*}
+        is bounded below by $H(X_n|X_{n-1}, \ldots, X_1)$ since for each $i=1,\ldots, n$, we have that $H(X_i|X_{i-1}, \ldots, X_1)\geq H(X_n|X_{n-1}, \ldots, X_1)\geq 0$. Thus, 
+        \begin{gather*}
+              H(X_n|X_{n-1}, \ldots, X_1)\leq \frac{\sum_{i=1}H(X_i|X_{i-1}, \ldots, X_1)}{n}
+        \end{gather*}By the chain rule for entropy, this is,
+        \begin{gather*}
+            H(X_n|X_{n-1}, \ldots, X_1) \leq \frac{H(X_1, \ldots, X_n)}{n}
+        \end{gather*}
+        as required.
+    \end{proof}
+    
+    \item\textbf{Problem 3:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    
+    \begin{proof}[Answer.]
+    Following the same procedure from page $73$ to find the stationary distribution, let $\mu$ be the stationary distribution vector. Then the stationary probability can be found by solving $\mu = \mu P$. Applying this to our transition matrix,
+    \begin{gather*}
+        \begin{bmatrix}
+            \mu_1 & \mu_2
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 - p  & p \\
+            q & 1-q
+        \end{bmatrix} = 
+        \begin{bmatrix}
+            \mu_1 - p\mu_1 + q\mu_2 \\
+            p\mu_1 + \mu_2 - q\mu_2
+        \end{bmatrix} \\
+        \Rightarrow
+        \mu_1 = \frac{q}{p+q},\hspace{8pt}
+        \mu_2 = \frac{p}{p+q}
+    \end{gather*}
+    Let $X_1\sim \mu$. The entropy rate is then calculated as,
+    \begin{gather*}
+        H(\chi) = H(X_2|X_1) \\
+        = - \sum_{i, j}\mu_i P_{ij}\log P_{ij} \\
+        = \frac{q}{p+q}H(p) + \frac{p}{p+q}H(q) \\
+    \end{gather*}
+    Now, we want to maximize $H(\chi) = H(X_2|X_1)$. Recall that the entropy of a random variable is maximized for the uniform distribution. Thus, $H(X_2|X_1)$ is maximized when $X_2|X_1$ is the uniform distribution. Additionally, since this stochastic process only has two states, the entropy rate is at most 1 bit. Intuitively, it requires only one binary question in order to describe the state of the system. The uniform distribution $p=1/2$ and $q=1/2$ satisfies this entropy rate.
+    
+    \end{proof}
+
+\newpage
+    
+    \item\textbf{Problem 4:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.]
+    Consider, 
+    \begin{gather*}
+        I(X_1, X_2, \ldots, X_n; X_{n+1}, X_{n+2}, \ldots, X_{2n}) = H(X_1, \ldots, X_n) - H(X_1, \ldots, X_n|X_{n+1}, \ldots, X_{2n}) \\
+        = H(X_1, \ldots, X_n) + H(X_{n+1}, \ldots, X_{2n}) - H(X_1, \ldots, X_n, X_{n+1}, \ldots,  X_{2n})
+    \end{gather*}
+    By Theorem 2.4.1. Since this is a stationary stochastic process, it is invariant to shifts in the time index. That is, $H(X_1, \ldots, X_n) = H(X_{n+1}, \ldots, X_{2n})$. Thus, 
+    \begin{gather*}
+        I(X_1, X_2, \ldots, X_n; X_{n+1}, X_{n+2}, \ldots, X_{2n}) = 2H(X_1, \ldots, X_n) - H(X_1, \ldots, X_n, X_{n+1}, \ldots,  X_{2n})
+    \end{gather*}
+    Consider, $H(\chi)$. We know this exists since the process is stationary. That is, 
+    \begin{gather*}
+        H(\chi) = \lim_{n\to \infty} \frac{1}{n}H(X_1, \ldots, X_n)
+    \end{gather*}
+    exists. Thus, 
+    \begin{gather*}
+        \lim_{n\to\infty} \frac{1}{2n}2H(X_1, \ldots, X_n) = \lim_{n\to \infty} \frac{1}{n}H(X_1, \ldots, X_n) =  H(\chi)
+    \end{gather*}
+    Now consider, $\lim_{n\to \infty}\frac{1}{2n}H(X_1, \ldots, X_{2n})$. By the uniqueness of limits, we know that 
+    \begin{gather*}
+        \lim_{n\to\infty}\frac{1}{n}H(X_1, \ldots, X_n) = \lim_{n\to\infty} \frac{1}{2n}H(X_1, \ldots, X_{2n})
+    \end{gather*}
+    Thus, \begin{gather*}
+        \lim_{n\to\infty} \frac{1}{2n}H(X_1, \ldots, X_{2n}) = H(\chi)
+    \end{gather*}
+    Therefore, 
+    \begin{gather*}
+        \lim_{n\to\infty}\frac{1}{2n} I(X_1, X_2, \ldots, X_n; X_{n+1}, X_{n+2}, \ldots, X_{2n}) \\
+        = \lim_{n\to\infty} \frac{1}{2n}2H(X_1, \ldots, X_n) - \lim_{n\to\infty}\frac{1}{2n}H(X_1, \ldots, X_{2n}) \\
+        = H(\chi) - H(\chi) = 0
+    \end{gather*}
+    as required.
+    
+    \end{proof}
+    
+    \item\textbf{Problem 5:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.]
+    
+    \end{proof}
+\end{itemize}
+
+\label{LastPage}
+\end{document}

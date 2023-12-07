@@ -1,0 +1,169 @@
+\documentclass{article}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]%
+{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm, amsmath, amssymb, tikz}
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage[colorlinks=true,
+linkcolor=blue,citecolor=blue,
+urlcolor=blue]{hyperref}
+
+\usetikzlibrary{calc,shapes, backgrounds}
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{\color{red} Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{open}{\color{red} Open Question}
+
+
+%Question template----------------------------------------
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+        \noindent{\bf \large#2}%
+    \vspace{0.5em} \hrule \vspace{.10in}%
+    \addtocounter{questionCounter}{1}%
+}{}
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+
+
+\begin{document}
+
+
+\begin{center}
+{\Huge Class Journal 10}\\
+\end{center}
+
+\vspace{5mm}
+
+\noindent {\large Lecture Handout 10:}
+
+\vspace{5mm}
+
+\noindent {\large Topic of the lecture: Codes}
+
+\begin{question}{Main Theorems/Ideas in the lecture}
+We went over defining and explaining a soource code $C$ for a random variable $X$ as a mapping from $\chi$ (the range of $X$) to $\mathcal{D}*$, the set of all finite-length strings of symbols form a D-ary alphabet. $C(x)$ denotes the corresponding codeword for an $x$ and $l(x)$ is the length in number of symbols of such codeword. We then defined the expected length of a source code $C$.
+
+The expected length $L(C)$ of a source code $C$ of a r.v. $X$ with probability mass function $p(x)$ is given by 
+\begin{gather*}
+    L(C) = \sum_{x\in\chi} p(x)l(x)
+\end{gather*}
+
+We then went on to describe some different types of codes. Many of which we had seen before. In lecture we showed some examples and explained the key differences between each of them. Here they are:
+\begin{enumerate}
+    \item Non-singular code: A code is non-singular if every element of the range of $X$ maps into a different string in $D*$; that is,
+    \begin{gather*}
+        x ̸\neq x' \Rightarrow C(x) ̸\neq C(x')
+    \end{gather*}
+    \item The extension of a code: The extension $C*$ of a code $C$ is the mapping from finite length strings of $\chi$ to finite-length strings of $\mathcal{D}$, defined by
+    \begin{gather*}
+        C(x_1x_2\ldots x_n) = C(x_1)C(x_2)\ldots C(x_n)
+    \end{gather*}
+    \item Uniquely decodable code: A code is called uniquely decodable if its extension is non-singular.
+    \item Prefix/Instantaneous code: A code is called a prefix code or an instantaneous code if no codeword is a prefix of any other codeword.
+\end{enumerate}
+
+    We then went on to discuss a crucial theorem in regard to prefix code and their codeword lengths.
+
+    \begin{theorem}[Kraft's Inequality] For any prefix code over an alphabet of size $D$, the codeword lengths $l_1, \ldots, l_m$ must satisfy the inequality 
+    \begin{gather*}
+        \sum_i D^{-l_i} \leq 1
+    \end{gather*}
+    Conversely, given a set of codeword lengths that satisfy this inequality, there exists an instantaneous code with these word lengths.
+    
+    \end{theorem}
+
+    \begin{theorem}[Extended Kraft Inequality] For any countably infinite set of codewords that form a prefix code, the codeword lengths satisfy the extended Kraft’s inequality 
+    \begin{gather*}
+        \sum_{i=1}^\infty D^{-l_i} \leq 1
+    \end{gather*}
+    Conversely, given any $l_1, l_2, \ldots,$ satisfying the extended Kraft inequality, we can construct a prefix code with these
+codewords lengths.
+\end{theorem}
+
+We then discussed an optimization on the expected length of a prefix code. That is, we wish to find the set of lengths $l_1, \ldots, l_m$ satisfying the Kraft inequality and whose expected length $L$ is less than the expected length of any other prefix code.
+
+Later on we will go on to discuss algorithms to achieve optimal code! Before that though, we develop a lower bound on the optimal code. Note that it may or not exist and this is a purely logical and mathematical lower bound that may or may not be possible to construct.
+
+\begin{theorem}[Entropy as lower bound of optimal code] The expected length $L$ of any instantaneous D-ary code for a random variable $X$ is greater than or equal to the entropy (base $D$) of $X$, $H_D(X)$; that is,
+\begin{gather*}
+    L \geq H_D(X)
+\end{gather*}
+with equality if and only if $D^{-l_i} = p_i$.
+    
+\end{theorem}
+
+\vspace{5cm}
+
+\end{question}
+
+\begin{question}{Materials that I find confusing or need more clarification/examples}
+
+\vspace{3cm}
+
+\end{question}
+
+\begin{question}{Class journal questions (if there are any in the lecture handout)}
+\begin{enumerate}
+    \item Consider the following code for a random variable.
+    \begin{gather*}
+        \Pr(X =1) = 1/3, \hspace{20pt} C(1) = 0 \\ 
+        \Pr(X=2) = 1/3, \hspace{20pt} C(2) = 10 \\ 
+        \Pr(X=3) = 1/3, \hspace{20pt} C(3) = 11 
+    \end{gather*}
+    Computer $H(X)$ and $L(C)$.
+    \begin{proof}[Answer.]
+    The entropy of $X$ is
+    \begin{gather*}
+        H(X) = \frac{1}{3}\log_2(3) + \frac{1}{3}\log_2(3) + \frac{1}{3}\log_2(3) =  \log_2(3)
+    \end{gather*}
+    and $L(C)$ is
+    \begin{gather*}
+        L(C) = 1 \cdot 1/3 + 2 \cdot 1/3 + 2\cdot 1/3 = 5/3
+    \end{gather*}
+    
+    \end{proof}
+\end{enumerate}
+\end{question}
+
+\vspace*{6cm}
+
+\begin{question}{Additional comments/suggestions about the lecture or the instructor}
+
+% {\color{blue}
+
+% \begin{enumerate}
+%     \item Said too many `Ok's.
+%     \item Speak slower.
+% \end{enumerate}
+
+% }
+
+\end{question}
+
+
+
+
+\end{document}

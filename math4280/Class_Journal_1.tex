@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]%
+{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm, amsmath, amssymb, tikz}
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage[colorlinks=true,
+linkcolor=blue,citecolor=blue,
+urlcolor=blue]{hyperref}
+
+\usetikzlibrary{calc,shapes, backgrounds}
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{\color{red} Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{open}{\color{red} Open Question}
+
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+%\newcommand{\C}{\ensuremath{\mathbb{C}}}
+%\newcommand{\F}{\ensuremath{\mathbb{F}}}
+\newcommand{\F}{\ensuremath{\mathcal{F}}}
+%\newcommand{\Se}{\ensuremath{\mathbb{S}}}
+\newcommand{\Po}{\ensuremath{\mathcal{P}}}
+\newcommand{\Pro}{\ensuremath{\mathbb{P}}}
+\newcommand{\condPro}[2]{\mathbb{P}(#1 | #2)}
+
+
+%Question template----------------------------------------
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+        \noindent{\bf \large#2}%
+    \vspace{0.5em} \hrule \vspace{.10in}%
+    \addtocounter{questionCounter}{1}%
+}{}
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+
+
+\begin{document}
+
+
+\begin{center}
+{\Huge Class Journal}\\
+\vspace{4pt}
+\Large Austin Barton
+\end{center}
+
+%\vspace{5mm}
+
+\noindent {\large Lecture Handout 1}
+
+\vspace{5mm}
+
+\noindent {\large Topic of the lecture: Introduction, Entropy, Channel Capacity}
+
+\begin{question}{Main Theorems/Ideas in the lecture}
+We went over the syllabus and the course structure.
+
+We went over some definitions to define entropy and channel capacity. We also discussed the natural interpretation of entropy and channel capacity.
+
+Some review we went over from probability: Random variables are variables whose possible values are numerical outcomes of a random phenomenom. The probability mass function $p(x)$ of a random variable $X$ is the probability distribution of a discrete random variable, and provides the possible values and their associated probabilities. $p(x_i) = \Pro(X=x_i)$. 
+
+Then we defined entropy. Let $X$ be a random variable with pmf $p(x)$. Then the entropy of $X$ is
+\begin{gather*}
+    H(X) = -\sum_{x}p(x)\log p(x)
+\end{gather*}
+where $\log $ is assumed to be based $2$. In class, we discussed how the entropy of $X$ is essentially a weighted sum of information content over each value of our random variable $X$. We can also write it as 
+\begin{gather*}
+    H(X) = \sum_{x}p(x)\log(\frac{1}{p(x)})
+\end{gather*}
+The term inside the $\log$ is the information content and the $p(x)$ factor is the weight. Entropy is also the lower bound on the number of bits or binary questions on average required to describe the random variable. We can only get as good as $H(X)$ where by good I mean as low. However, as mentioned in class, it is not often that we can get as low as $H(X)$. This idea circles back to the first fundamental question in the handout. That $H(X)$ is the ultimate data compression of $X$.
+
+Another way to interpret entropy is as the "uncertainty" of a single random variable. The higher entropy, the more uncertain we are about it. The conditional entropy $H(X|Y)$ is the entropy of a random variable condtioned on the knowledge of another random variable. The reduction in uncertainty due to another random variable is called the mutual information, which we defined as
+\begin{gather*}
+I(X;Y) = H(X) - H(X|Y) = \sum p(x,y)\log\frac{p(x,y)}{p(x)p(y)})
+\end{gather*}
+$I(X;Y)$ is a measure of the dependence between two random variables.
+
+We then defined the communication channel as a system in which the output depends probabilistically on its input. It is characterized by a probability transition matrix $p(y|x)$ that determines the conditional distribution of the output given the input. For a communication channel with input $X$ and output $Y$, we defined the capacity $C$ as
+\begin{gather*}
+    C = \max_{p(x)}I(X;Y)
+\end{gather*}
+The communication capacity $C$ is the max rate of which we can send information over the channel and recover the information at the output with a vanishingly low probability of error.
+
+In class we did an example where we numbered $8$ horses and made a probability distribution for whether or not it was each horse. We showed that with certain distributions, we can average the number of required bits in order to encode the horse lower than what we would expect. We would typically expect $3$ bits required for this example. However, if we reduce the number of bits for horses more likely to be chosen and increase the number of bits for horses much less likely to be chosen, we can average the number of required bits to be lower than $3$. In our example we got it down to $2$, which was exactly the etnropy of our random variable in the example.
+
+\vspace{5cm}
+
+\end{question}
+
+\begin{question}{Materials that I find confusing or need more clarification/examples}
+
+Is communication capacity the same as channel capacity? Also, when we are talking about the channel capacity $C$, from the definition given in class I understand that it is essentially the max mutual information between two random variables $X$ and $Y$ over each probability parameter $p(x)$. That is, $C =\displaystyle \max_{p(x)}I(X;Y)$. So, that means that $C$ is the maximum amount of relative entropy between $p(x,y)$ and $p(x)p(y)$. The notes describe $C$ as the "maximum rate at which we can send information over the channel and
+recover the information at the output with a vanishingly low probability of error. " I don't understand the connection here. How do the ideas of relative entropy and mutual information connect to make the idea of $C$ being the max rate of information over a channel?
+
+\vspace{3cm}
+
+\end{question}
+
+\begin{question}{Class journal questions (if there are any in the lecture handout)}
+
+
+
+\end{question}
+
+\vspace*{6cm}
+
+\begin{question}{Additional comments/suggestions about the lecture or the instructor}
+I really like the structure of the lectures so far. The pace is perhaps a little bit slow, but the examples, discussions, and explanations are exemplary. It has so far been one of the best classes in terms of lecturing. It also helps that I like the content.
+
+% {\color{blue}
+
+% \begin{enumerate}
+%     \item Said too many `Ok's.
+%     \item Speak slower.
+% \end{enumerate}
+
+% }
+
+\end{question}
+
+
+
+
+\end{document}

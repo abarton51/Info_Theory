@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]%
+{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm, amsmath, amssymb, tikz}
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage[colorlinks=true,
+linkcolor=blue,citecolor=blue,
+urlcolor=blue]{hyperref}
+
+\usetikzlibrary{calc,shapes, backgrounds}
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{\color{red} Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{open}{\color{red} Open Question}
+
+
+%Question template----------------------------------------
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+        \noindent{\bf \large#2}%
+    \vspace{0.5em} \hrule \vspace{.10in}%
+    \addtocounter{questionCounter}{1}%
+}{}
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+
+
+\begin{document}
+
+
+\begin{center}
+{\Huge Class Journal 6}\\
+\end{center}
+
+\vspace{5mm}
+
+\noindent {\large Lecture Handout \#: 6}
+
+\vspace{5mm}
+
+\noindent {\large Topic of the lecture: Data Processing Inequalities and Fano's Inequality}
+
+\begin{question}{Main Theorems/Ideas in the lecture}
+
+Random variables $X,Y,Z$ are said to form a Markov chain if the conditional distribution of $Z$ depends only on $Y$ and is conditionally independent of $X$.
+
+We denote this as $X\to Y\to Z$.
+
+We can write the joint probability mass function as
+\begin{gather*}
+    p(x, y, z) = p(x)p(y|x)p(z|y)
+\end{gather*}
+
+We went over $3$ important facts in regards to this.
+\begin{enumerate}
+    \item $X\to Y\to Z$ if and only if $X$ and $Z$ are independent given $Y$.
+    \item $X\to Y\to Z$ if and only if $Z\to Y\to X$.
+    \item If $Z=f(Y)$, then $X\to Y \to f(Y)$ is a Markov chain.
+\end{enumerate}
+
+\textbf{Theorem 1.} Data Processing Inequality
+If $X\to Y\to Z$ then 
+\begin{gather*}
+    I(X;Z)\geq I(X;Z)
+\end{gather*}
+The proof behind this theorem comes from the information chain rule and the non-negativity property of mutual information.
+
+We then discussed some corollaries. Namely,
+
+\textbf{Corollary 1:} If $Z = g(Y)$, then we have $I(X;Y) \geq I(X;g(Y))$. It follows from the previous Theorem.
+
+\textbf{Corollary 2:} If $X\to Y\to Z$, then $I(X;Y|Z)\leq I(X;Y)$. This one is similar to what we used in the proof of the theorem.\smallskip
+
+We then discussed Fano's inequality. Another powerful inequality that has to do with bounds on how bad or good estimators of $X$, which we denote $\hat X$, are.
+
+\textbf{Theorem 2.} Fano's Inequality
+
+For any estimator $\hat X$ such that $X\to Y\to \hat X$, with $P_e = \Pr(X\neq \hat X)$, we have \begin{gather*}
+    H(P_e) + P_e\log|\chi| \geq H(X|\hat X) \geq H(X|Y)
+\end{gather*}
+The proof shown in class and in the textbook follows from primarily using chain rule for entropies and the data-processing inequality, since $X\to Y\to \hat X$ is a Markov chain and the estimator is a function of $Y$. Following this we finished with two Corollaries and a Lemma.
+
+\textbf{Corollary 3.} For any two random variables $X$ and $Y$, let $p=\Pr(X\neq Y)$.
+\begin{gather*}
+    H(p) + p\log|\chi| \geq H(X|Y)
+\end{gather*}
+
+The following Lemma puts a lower bound on how precise our estimator can be.
+
+\textbf{Lemma 1.} If $X$ and $X'$ are i.i.d. r.v.'s with entropy $H(X)$,
+\begin{gather*}
+    \Pr(X=X')\geq 2^{-H(X)}
+\end{gather*}
+with equality if and only if $X$ has a uniform distribution.
+
+The following Corollary puts lower bounds on how accurate our estimator is given that the estimator has a different probability distribution $r$ but they share the same alphabet $\chi$.
+
+\textbf{Corollary 4.}
+Let $X$, $X'$ be independent with $X\sim p(x)$, $X'\sim r(x)$, $x,x'\in \chi$. Then \begin{gather*}
+    \Pr(X = X')\geq 2^{-H(p) - D(p||r)} \\
+    \Pr(X = X') \geq 2^{-H(r) - D(r||p)}
+\end{gather*}
+
+
+\vspace{5cm}
+
+\end{question}
+\newpage
+\begin{question}{Materials that I find confusing or need more clarification/examples}
+
+\vspace{3cm}
+
+\end{question}
+
+\begin{question}{Class journal questions (if there are any in the lecture handout)}
+\textbf{Question:}
+    If $X_1\to X_2\to X_3\to X_4$ forms a Markov chain, then $I(X_1, X_4)\leq I(X_2, X_3)$.
+    \begin{proof}[Answer.]
+    Consider, 
+    \begin{gather*}
+        I(X_1;X_2, X_3, X_4) = I(X_1;X_4) + I(X_1;X_2, X_3|X_4)  \\
+        = I(X_1; X_4) + I(X_1;X_2|X_4) + I(X_1;X_3|X_2,X_4)
+    \end{gather*}
+    But given $X_2$, we know that $X_3$ is conditionally independent of $X_1$. So $I(X_1;X_3|X_2, X_4) = 0$. So we have 
+    \begin{gather*}
+        I(X_1;X_2, X_3, X_4) = I(X_1;X_4)+ I(X_1;X_2|X_4)
+    \end{gather*}
+    And now, by symmetry of mutual information and the chain rule again, we obtain,
+    \begin{gather*}
+        I(X_1;X_2, X_3, X_4) = I(X_2;X_1, X_3, X_4) \\
+        = I(X_2;X_3) + I(X_2;X_1, X_4|X_3) \\
+        = I(X_2;X_3) + I(X_2;X_1|X_3) + I(X_2;X_4|X_1, X_3)
+    \end{gather*}
+    We know that $X_4$ is conditionally independent of $X_2$ given $X_3$. Therefore, $ I(X_2;X_4|X_1, X_3) = 0$. So we now have,
+    \begin{gather*}
+        I(X_1;X_4)+ I(X_1;X_2|X_4) = I(X_2;X_3) + I(X_2;X_1|X_3)
+    \end{gather*}
+    Now, because $X_1\to X_2\to X_3\to X_4$, we know $I(X_1;X_2|X_4) \geq I(X_1;X_2|X_3)$,
+    \begin{gather*}
+        I(X_1;X_4) \leq I(X_2;X_3)
+    \end{gather*}
+    \end{proof}
+
+\end{question}
+
+\vspace*{6cm}
+
+\begin{question}{Additional comments/suggestions about the lecture or the instructor}
+
+% {\color{blue}
+
+% \begin{enumerate}
+%     \item Said too many `Ok's.
+%     \item Speak slower.
+% \end{enumerate}
+
+% }
+
+\end{question}
+
+
+
+
+\end{document}

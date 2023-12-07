@@ -1,0 +1,486 @@
+\newcommand{\copyrightnotice}{\enlargethispage{24pt}
+\let\thefootnote\relax\footnote{\copyright 2022 Christopher Heil}}
+
+\newcommand{\tildep}{{\hbox{\raise .08ex
+\hbox{${\scriptstyle{\sim}}$}}}\hskip 0.4 pt}
+
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\challenge}{{\hglue -3 pt *\ }}
+\newcommand{\COLON}{\! : \!}
+\newcommand{\EQ}{\; = \;}
+\newcommand{\Eq}{\, = \,}
+\newcommand{\NE}{\; \ne \;}
+\newcommand{\Ne}{\, \ne \,}
+\newcommand{\GE}{\; \ge \;}
+\newcommand{\Ge}{\, \ge \,}
+\newcommand{\GT}{\; > \;}
+\newcommand{\Gt}{\, > \,}
+\newcommand{\LE}{\; \le \;}
+\newcommand{\Le}{\, \le \,}
+\newcommand{\LT}{\; < \;}
+\newcommand{\Lt}{\, < \,}
+\newcommand{\TO}{\; \to \;}
+\newcommand{\To}{\, \to \,}
+\newcommand{\MAPSTO}{\; \mapsto \;}
+\newcommand{\Capp}{\, \cap \,}
+\newcommand{\CAP}{\; \cap \;}
+\newcommand{\Cupp}{\, \cup \,}
+\newcommand{\CUP}{\; \cup \;}
+\newcommand{\MONOTONE}{\; \monotone \;}
+\newcommand{\DECREASE}{\; \decrease \;}
+\newcommand{\APPROX}{\; \approx \;}
+\newcommand{\EQUIVNORM}{\; \asymp \;}
+\newcommand{\Iff}{\; \iff \;}
+\newcommand{\IFF}{\quad \iff \quad}
+\newcommand{\Implies}{\; \implies \;}
+\newcommand{\IMPLIES}{\quad \implies \quad}
+\newcommand{\IN}{\; \in \;}
+\newcommand{\In}{\, \in \,}
+\newcommand{\NOTIN}{\; \not\in \;}
+\newcommand{\NOTTO}{\; \notto \;}
+\newcommand{\NOTIMPLIES}{\quad \Longrightarrow\hskip -14 pt / \hskip 4 pt \quad}
+\newcommand{\oneway}{\quad
+ \genfrac{}{}{0pt}{}{\implies}{\Longleftarrow\hskip -14 pt / \hskip 4 pt} \quad}
+\newcommand{\SETMINUS}{\, \setminus \,}
+\newcommand{\Setminus}{\tinyback \setminus \tinyback}
+\newcommand{\SUBSET}{\; \subseteq \;}
+\newcommand{\SUBSETEQ}{\; \subseteq \;}
+\newcommand{\Subseteq}{\, \subseteq \,}
+\newcommand{\SUBSETNEQ}{\; \subsetneq \;}
+\newcommand{\Subsetneq}{\, \subsetneq \,}
+\newcommand{\SUPSETEQ}{\; \supseteq \;}
+\newcommand{\Supseteq}{\, \supseteq \,}
+\newcommand{\SUPSETNEQ}{\; \supsetneq \;}
+\newcommand{\Supsetneq}{\, \supsetneq \,}
+\newcommand{\CONG}{\; \cong \;}
+\newcommand{\plus}{\; + \;}
+\newcommand{\Plus}{\, + \,}
+\newcommand{\minus}{\; - \;}
+\newcommand{\Minus}{\, - \,}
+\newcommand{\completeimplies}{\underset {\text{if~$X$ is complete}} \IMPLIES}
+\newcommand{\eqdef}{\overset {\raise .4ex \hbox{\text{\scriptsize def}}} =}
+
+\newcommand{\redrightarrow}{{\color{red} \rightarrow}}
+\newcommand{\rednearrow}{{\color{red} \nearrow}}
+\newcommand{\rednwarrow}{{\color{red} \nwarrow}}
+\newcommand{\redsearrow}{{\color{red} \searrow}}
+\newcommand{\redswarrow}{{\color{red} \swarrow}}
+\newcommand{\reddownarrow}{{\color{red} \downarrow}}
+\newcommand{\redDownarrow}{\color{red} \Downarrow}
+\newcommand{\redImplies}{{\color{red} \Implies} }
+
+%\newcommand{\svee}{{\scriptscriptstyle{\vee}}}
+\newcommand{\svee}{{\hbox{\raise .4ex \hbox{${\scriptscriptstyle{\vee}}$}}}}
+\newcommand{\swedge}{{\hbox{\raise .4ex \hbox{${\scriptscriptstyle{\wedge}}$}}}}
+\newcommand{\sveeexp}{\svee\tinyback}
+\newcommand{\swedgeexp}{\swedge\tinyback}
+\newcommand{\swedgehat}[1]{\overset {\scriptscriptstyle{\wedge}} #1}
+\newcommand{\sveecheck}[1]{\overset {\scriptscriptstyle{\vee}} #1}
+
+\newcommand{\Ac}{{\mathcal{A}}}
+\newcommand{\AC}{\mathrm{AC}}
+\newcommand{\avg}{\textup{Avg}}
+\newcommand{\alphabar}{\overline{\alpha}}
+\newcommand{\betabar}{\overline{\beta}}
+\newcommand{\Bc}{{\mathcal{B}}}
+%\newcommand{\ball}{{\mathrm{Ball}}}
+%\newcommand{\Ball}{{\mathrm{Ball}}}
+\newcommand{\ball}{D}
+\newcommand{\littleback}{\hskip -0.6 true pt}
+\newcommand{\tinyback}{\hskip -1 true pt}
+\newcommand{\medback}{\hskip -1.2 true pt}
+\newcommand{\bigback}{\hskip -1.5 true pt}
+\newcommand{\bigabs}[1]{\bigl|#1\bigr|}
+\newcommand{\Bigabs}[1]{\Bigl|#1\Bigr|}
+\newcommand{\biggabs}[1]{\biggl|#1\biggr|}
+\newcommand{\bigbracket}[1]{\bigl[#1\bigr]}
+\newcommand{\Bigbracket}[1]{\Bigl[#1\Bigr]}
+\newcommand{\biggbracket}[1]{\biggl[#1\biggr]}
+\newcommand{\borel}{{\Bc_\sigma}}
+\newcommand{\BV}{\mathrm{BV}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Cc}{{\mathcal{C}}}
+\newcommand{\chat}{\widehat{c}\tinyspace}
+\newcommand{\chatprime}{\chat^{\,\prime}}
+%\newcommand{\ccheck}{\sveecheck{c}}
+\newcommand{\ccheck}{\overset {\scriptscriptstyle{\hskip 1.5 pt \vee}} c}
+\newcommand{\ccard}{{\mathfrak{c}}}
+\newcommand{\card}{\textup{card}}
+\newcommand{\ceiling}[1]{\lceil #1 \rceil}
+\newcommand{\veecheck}[1]{\overset \vee #1}
+\newcommand{\CHI}{\hbox{\raise .4ex \hbox{$\chi$}}}
+\newcommand{\CHIA}{\CHI_{\hskip -0.7 true pt A}}
+\newcommand{\CHIhat}{\widehat{\CHI}}
+\newcommand{\CHINhat}
+    {\CHI_{\!N} \hskip -10.5pt \widehat{\phantom{\CHI}} \hskip 3 pt}
+\newcommand{\CHIcheck}
+ {\overset {\lower .1ex \hbox{${\scriptscriptstyle{\hskip 1.5 pt\vee}}$}}{\CHI}}
+\newcommand{\CHINcheck}
+    {\overset {\scriptscriptstyle{\hskip 4.0 pt \vee}} \CHI_{\!N}}
+\newcommand{\CHIOmegacheck}
+    {\overset {\scriptscriptstyle{\hskip 2.5 pt \vee}} \CHI_{\!\varOmega}}
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\clspan}{{\overline{\mbox{\rm span}}}}
+\newcommand{\codim}{{\textup{codim}}}
+\newcommand{\Col}{\textup{Col}}
+\newcommand{\comp}{{\mathrm{C}}}
+\newcommand{\medcap}{\operatornamewithlimits{\textstyle\bigcap}}
+\newcommand{\medcup}{\operatornamewithlimits{\textstyle\bigcup}}
+\newcommand{\smallcup}{\operatornamewithlimits{\scriptstyle\bigcup}}
+\newcommand{\scap}{\hbox{\raise .25ex
+\hbox{${\operatornamewithlimits{\scriptstyle\bigcap}}$}}}
+\newcommand{\scup}{\hbox{\raise .25ex
+\hbox{${\operatornamewithlimits{\scriptstyle\bigcup}}$}}}
+\newcommand{\ddx}{\frac{d}{dx}}
+\newcommand{\Dc}{{\mathcal{D}}}
+\newcommand{\decrease}{\searrow}
+\newcommand{\deltahat}{\widehat{\delta}}
+\newcommand{\deltacheck}
+  {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 2 pt\vee}}$}} \delta}
+\newcommand{\di}{\displaystyle}
+\newcommand{\diam}{{\textup{diam}}}
+\newcommand{\dist}{{\textup{dist}}}
+\newcommand{\divides}{{\tinyspace | \tinyspace}}
+\newcommand{\notdivides}{{\tinyspace\nmid\tinyspace}}
+\newcommand{\domain}{{\textup{domain}}}
+\newcommand{\tE}{{\widetilde{E}}}
+\newcommand{\Ec}{{\mathcal{E}}}
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\bigenumspace}{\vglue -4 pt}
+\newcommand{\enumspace}{\vglue -3 pt}
+\newcommand{\smallenumspace}{\vglue -2 pt}
+\newcommand{\eps}{\varepsilon}
+%\newcommand{\esssup}{\mathop{\text{\rm ess \, sup}}}
+\newcommand{\esssup}{\operatornamewithlimits{{\textup{ess\tinyspace sup}}}}
+\newcommand{\bigeval}[1]{{\bigl. #1 \bigr|}}
+\newcommand{\Bigeval}[1]{{\Bigl. #1 \Bigr|}}
+\newcommand{\biggeval}[1]{{\biggl. #1 \biggr|}}
+%\newcommand{\F}{\mathbf{\overline{F}}}
+\newcommand{\F}{\mathbf{F}}
+%\newcommand{\F}{\mathbb{F}}
+\newcommand{\Fc}{{\mathcal{F}}}
+\newcommand{\tFc}{{\widetilde{\mathcal{F}}}}
+\newcommand{\Fcheck}
+    {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 2 pt\vee}}$}} F}
+\newcommand{\fcheck}{\fveecheck}
+\newcommand{\fhat}{\widehat{f}}
+%\newcommand{\fhat}{\overset {\scriptscriptstyle{\hskip 4 pt\wedge}} f}
+\newcommand{\fwedgehat}
+    {\overset {\lower .6ex \hbox{${\scriptscriptstyle{\hskip 3 pt\wedge}}$}} f}
+\newcommand{\fveecheck}
+    {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 2 pt\vee}}$}} f}
+\newcommand{\fkcheck}
+   {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 1 pt\vee}}$}} {f_k}}
+%\newcommand{\fhatcheck}{\bigparen{\fwedgehat\tinyspace}^{\bigback\svee}}
+\newcommand{\fhatcheck}{\bigparen{\fhat\biggerspace}^{\bigback\svee}}
+\newcommand{\fcheckhat}{\bigparen{\fveecheck\tinyspace}^{\tinyback\swedge}}
+\newcommand{\fhatprime}{\fhat^{\hskip 3pt\raiseprime}}
+\newcommand{\raiseprime}{\hbox{\raise .3ex \hbox{${\scriptstyle{\prime}}$}}}
+%\newcommand{\fhatprime}{\fhat^{\tinyspace\prime}}
+\newcommand{\fprimehat}{\widehat{f'\littlespace}}
+\newcommand{\flambdahat}
+    {f_\lambda \hskip -8.5pt \widehat{\phantom{f}} \hskip 3 pt}
+\newcommand{\tf}{\widetilde{f} \rule{0pt}{10.6pt}}
+\newcommand{\tfh}{\widetilde{f}_{\hskip -0.2 true pt h}}
+\newcommand{\tfhn}{\widetilde{f}_{\hskip -0.2 true pt h_n}}
+%\newcommand{\tfh} {f_h \hskip -8pt \widetilde{\phantom{f}} \hskip 2 pt}
+\newcommand{\fbar}{\bar{f} \rule{0pt}{10.4pt}}
+%\newcommand{\tfhat}{\widehat{\widetilde{f}}}
+\newcommand{\tfhat} {\widetilde{f}
+    \hskip -4.5pt \widehat{\phantom{\widetilde{f}}} \hskip -1.5 pt}
+\newcommand{\fkhat} {f_k \hskip -8pt \widehat{\phantom{f}} \hskip 2 pt}
+\newcommand{\fmhat} {f_m \hskip -10pt \widehat{\phantom{f}} \hskip 4 pt}
+\newcommand{\fnhat} {f_n \hskip -8.5pt \widehat{\phantom{f}} \hskip 2 pt}
+\newcommand{\fNhat} {f_N \hskip -11.5pt \widehat{\phantom{M}} \hskip 4 pt}
+\newcommand{\floor}[1]{\lfloor \tinyback #1 \tinyback \rfloor}
+\newcommand{\Gc}{{\mathcal{G}}}
+\newcommand{\Gcheck}
+    {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 2 pt\vee}}$}} G}
+\newcommand{\ghat}{\widehat{g}}
+%\newcommand{\gcheck}{\check{g}}
+\newcommand{\ghatcheck}{\bigparen{\ghat\biggerspace}^{\bigback\svee}}
+%\newcommand{\ghatcheck}{g^{\swedge\svee}}
+\newcommand{\gcheck}{\gveecheck}
+\newcommand{\gveecheck}
+    {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 2 pt\vee}}$}} g}
+\newcommand{\gcheckhat}{\bigparen{\gveecheck\tinyspace}^{\tinyback\swedge}}
+\newcommand{\gprimehat}{\tinyback\widehat{\,g'\,}\tinyback}
+\newcommand{\glambdahat}
+    {g_\lambda \hskip -8.5pt \widehat{\phantom{g}} \hskip 3 pt}
+\newcommand{\glambdaprime}{g_\lambda^{\;\prime}}
+\newcommand{\gnhat}{\widehat{g_n}}
+\newcommand{\gncheck}
+   {\overset {\lower .1ex \hbox{${\scriptscriptstyle{\hskip -3 pt\vee}}$}}{g_n}}
+\newcommand{\tg}{\widetilde{g}}
+%\newcommand{\tgh}{\widetilde{g}_{\hskip -0.1 true pt h}}
+\newcommand{\tgh} {g_h \hskip -8pt \widetilde{\phantom{g}} \hskip 2 pt}
+\newcommand{\Ghat}{\widehat{G}}
+\newcommand{\graph}{{\textup{graph}}}
+\newcommand{\wedgehat}[1]{\overset \wedge #1}
+\newcommand{\tH}{\widetilde{H}}
+\newcommand{\hhat}{\widehat{h}}
+\newcommand{\Hhat}{\widehat{H}}
+\newcommand{\Hc}{{\mathcal{H}}}
+\newcommand{\Hf}{H \hskip -0.7 true pt f}
+\newcommand{\hcheck}
+    {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 2 pt\vee}}$}} h}
+\newcommand{\hmhat} {h_m \hskip -12.5pt \widehat{\phantom{h}} \hskip 4 pt}
+\newcommand{\hnhat} {h_n \hskip -11pt \widehat{\phantom{h}} \hskip 4 pt}
+\newcommand{\hncheck}
+   {\overset {\lower .2ex \hbox{${\scriptscriptstyle{\hskip -4 pt\vee}}$}}{h_n}}
+%\newcommand{\Th}{\widetilde{h}}
+\newcommand{\Herm}{{\text{H}}}
+\newcommand{\HS}{{\text{HS}}}
+\newcommand{\Imag}{\textup{Im}}
+\newcommand{\ip}[2]{\langle#1,#2\rangle}
+\newcommand{\bigip}[2]{\bigl\langle #1, \, #2 \bigr\rangle}
+\newcommand{\Bigip}[2]{\Bigl\langle #1, \, #2 \Bigr\rangle}
+\newcommand{\biggip}[2]{\biggl\langle #1, \, #2 \biggr\rangle}
+\newcommand{\boxip}[2]{[#1,#2]}
+\newcommand{\itema}{{\item{\textup{(a)}}}}
+\newcommand{\itemb}{\item{\textup{(b)}}}
+\newcommand{\Khat}{\widehat{K}}
+\newcommand{\Kcheck}
+  {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 2 pt\vee}}$}} K}
+\newcommand{\khat}{\widehat{k}}
+\newcommand{\kNhat}{\widehat{k_N}}
+\newcommand{\tk}{\widetilde{k}}
+\newcommand{\klambdahat}
+    {k_\lambda \hskip -8.5pt \widehat{\phantom{k}} \hskip 3 pt}
+%\newcommand{\klambdahat}{\overset {\tinyspace\wedge} {k_\lambda}}
+\newcommand{\klambdatilde}
+    {k_\lambda \hskip -8.5pt \widetilde{\phantom{k}} \hskip 3 pt
+     \rule{0pt}{10.6pt}}
+\newcommand{\kntilde} {
+    k_n \hskip -8.5pt \widetilde{\phantom{k}} \hskip 3 pt}
+\newcommand{\knhat} {k_n \hskip -10pt \widehat{\phantom{k}} \hskip 4 pt}
+\newcommand{\kncheck}
+   {\overset {\lower .2ex \hbox{${\scriptscriptstyle{\hskip 1 pt\vee}}$}} {k_n}}
+\newcommand{\Lc}{{\mathcal{L}}}
+\newcommand{\length}{{\textup{length}}}
+\newcommand{\Lip}{\textup{Lip}}
+\newcommand{\loc}{{\mathrm{loc}}}
+\newcommand{\Lpt}{\widetilde{L^p}}
+\newcommand{\Liminf}{\operatornamewithlimits{{\textup{lim\biggerspace inf}}}}
+\newcommand{\Limsup}{\operatornamewithlimits{{\textup{lim\biggerspace sup}}}}
+\newcommand{\textmax}{{\mathrm{max}}}
+\newcommand{\textmin}{{\mathrm{min}}}
+\newcommand{\Mbar}{\overline{M}}
+\newcommand{\cM}{{\mathcal{M}}}
+\newcommand{\Mf}{M \hskip -0.7 true pt f}
+\newcommand{\bmat}[1]{\left[\begin{array}{rrrrrrr} #1 \end{array}\right]}
+\newcommand{\bmatf}[1]{\left[\begin{array}{ccccccc} #1 \end{array}\right]}
+\newcommand{\bmatcen}[1]{\left[\begin{array}{ccccccc} #1 \end{array}\right]}
+\newcommand{\smallbmat}[1]{\left[\smallmatrix #1 \endsmallmatrix\right]}
+\newcommand{\measure}{\operatorname{\overset m \to}} 
+\newcommand{\metric}{\mathrm{d}}
+\newcommand{\monotone}{\nearrow}
+\newcommand{\tmonotone}{\tinyback\nearrow\tinyback}
+\newcommand{\tmu}{\widetilde{\mu}}
+\newcommand{\mucheck}
+    {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 2 pt\vee}}$}} \mu}
+\newcommand{\muhat}{\widehat{\mu}}
+\newcommand{\mubar}{\overline{\mu}}
+\newcommand{\nuhat}{\widehat{\nu}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\notimplies}{{\Longrightarrow \hskip -14 pt / \hskip 4 pt}}
+\newcommand{\notto}{{\hskip 2 pt \rightarrow \hskip -10 pt / \hskip 6 pt}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\bignorm}[1]{\bigl\|#1\bigr\|}
+\newcommand{\Bignorm}[1]{\Bigl\|#1\Bigr\|}
+\newcommand{\biggnorm}[1]{\biggl\|#1\biggr\|}
+\newcommand{\tnu}{\widetilde{\nu}}
+\newcommand{\Oc}{{\mathcal{O}}}
+\newcommand{\medoplus}{\operatornamewithlimits{\textstyle\bigoplus}}
+\newcommand{\Omegab}{\mathbf{\varOmega}}
+\newcommand{\osc}{{\textup{osc}}}
+\newcommand{\Pb}{\mathbb{P}}
+\newcommand{\Pbb}{{\mathbf{P}}}
+\newcommand{\Pc}{\mathcal{P}}
+\newcommand{\pv}{{\textup{pv}}}
+\newcommand{\bigparen}[1]{\bigl(#1\bigr)}
+\newcommand{\Bigparen}[1]{\Bigl(#1\Bigr)}
+\newcommand{\biggparen}[1]{\biggl(#1\biggr)}
+\newcommand{\Biggparen}[1]{\Biggl(#1\Biggr)}
+\newcommand{\parensize}[1]{\left(#1\right)}
+\newcommand{\phat}{\widehat{p}\tinyspace}
+\newcommand{\phihat}{\widehat{\phi}}
+\newcommand{\poly}{{\mathrm{poly}}}
+\newcommand{\varphihat}{\widehat{\varphi}}
+\newcommand{\tvarphi}{\widetilde{\varphi} \rule{0pt}{9.8pt} }
+\newcommand{\varphixihat}
+    {\varphi_{\xi} \hskip -9pt \widehat{\phantom{\varphi}} \hskip 2.5 pt}
+\newcommand{\varphixikhat}
+    {\varphi_{\xi_k} \hskip -9pt \widehat{\phantom{\varphi}} \hskip 2.5 pt}
+\newcommand{\varphixitilde}
+    {\varphi_{\xi} \hskip -9pt \widetilde{\phantom{\varphi}} \hskip 2.5 pt}
+\newcommand{\varphionehat}
+    {\varphi_{1} \hskip -9.5pt \widehat{\phantom{\varphi}} \hskip 1.5 pt}
+\newcommand{\varphimhat}
+    {\varphi_m \hskip -9pt \widehat{\phantom{\varphi}} \hskip 2.5 pt}
+\newcommand{\varphinhat}
+    {\varphi_n \hskip -10.0pt \widehat{\phantom{\varphi}} \hskip 2.5 pt}
+\newcommand{\varphicheck}
+    {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 1 pt\vee}}$}}
+              \varphi}
+\newcommand{\psihat}{\widehat{\psi}}
+\newcommand{\psixihat}
+    {\psi_{\xi} \hskip -9pt \widehat{\phantom{\psi}} \hskip 2.5 pt}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Qc}{{\mathcal{Q}}}
+\newcommand{\tQ}{{\widetilde{Q}}}
+\newcommand{\qeddef}{{\quad $\diamondsuit$}}
+%\newcommand{\qeddef}{{$\ \hfill \diamondsuit$}}
+\newcommand{\qeddeff}{{\qquad \diamondsuit}}
+\newcommand{\qeddefff}{{\quad \diamondsuit}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rc}{{\mathcal{R}}}
+\newcommand{\Rhat}{\widehat{\R}}
+%\newcommand{\Rbar}{{\bar{R}}}
+\newcommand{\Rbar}
+  {{\overset {\hskip -0.9 pt \lower 1.5pt \hbox{{\rule{6.7pt}{0.45pt}}}} \R}}
+\newcommand{\subRbar}
+   {{\overset {\hskip -0.8 pt \lower 1.5pt \hbox{{\rule{4.5pt}{0.5pt}}}} \R}}
+\newcommand{\Real}{\textup{\text{Re}}}
+\newcommand{\radius}{{\textup{radius}}}
+\newcommand{\range}{{\textup{range}}}
+\newcommand{\clrange}{{\overline{\mbox{\rm range}}}}
+\newcommand{\rank}{{\textup{rank}}}
+\newcommand{\row}{{\text{---}}}
+%\newcommand{\shah}{\operatorname{\text{\cyr Sh}}}
+\newcommand{\scheck}
+    {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 0.5 pt\vee}}$}} s}
+\newcommand{\Sc}{{\mathcal{S}}}
+\newcommand{\bS}{\bar{S}}
+\newcommand{\tS}{\widetilde{S}}
+%\newcommand{\SNa}{S_N^{\hskip 0.5 pt \hbox{\small a}}}
+\newcommand{\SNa}{S_N^{\hskip 0.5 pt
+  \hbox{\raise .3ex \hbox{\small\textup{a}}}}}
+\newcommand{\SNaa}[1]{S_#1^{\hskip 0.5 pt
+  \hbox{\raise .3ex \hbox{\small\textup{a}}}}}
+%\newcommand{\SNa}{S_N^{\hskip 0.5 pt a}}
+\newcommand{\SNo}{S_N^{\hskip 0.5 pt
+  \hbox{\raise .3ex \hbox{\small\textup{o}}}}}
+%\newcommand{\SNo}{S_N^{\hskip 0.5 pt \hbox{o}}}
+%\newcommand{\SNo}{S_N^{\hskip 1 pt o}}
+\newcommand{\SNt}{S_N^{\hskip 0.5 pt
+  \hbox{\raise .3ex \hbox{\small\textup{t}}}}}
+\newcommand{\SN}{S_N \hskip -0.6 pt}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\bigset}[1]{\bigl\{#1\bigr\}}
+\newcommand{\Bigset}[1]{\Bigl\{#1\Bigr\}}
+\newcommand{\biggset}[1]{\biggl\{#1\biggr\}}
+\newcommand{\setsize}[1]{\left\{#1\right\}}
+\newcommand{\Sigmabar}{\overline{\varSigma}}
+\newcommand{\sgn}{{\mathrm{sgn}}}
+\newcommand{\sign}{{\mathrm{sign}}}
+\newcommand{\sinc}{{\mathrm{sinc}}}
+\newcommand{\sskip}[1]{{\vskip 0.#1 true in}}
+\newcommand{\smallestskip}{{\vskip 1 pt}}
+\newcommand{\smallerskip}{{\vskip 2 pt}}
+\newcommand{\itsyspace}{\hskip 0.4 pt}
+\newcommand{\tiniestspace}{\hskip 0.6 pt}
+\newcommand{\tinierspace}{\hskip 0.8 pt}
+\newcommand{\tinyspace}{\hskip 1 pt}
+\newcommand{\littlespace}{\hskip 1.2 pt}
+\newcommand{\bigspace}{\hskip 1.5 pt}
+\newcommand{\biggerspace}{\hskip 2 pt}
+%\newcommand{\solution}{\vskip 0.1 true in \noindent
+%\underbar{Solution} \newline \indent}
+%\newcommand{\solutionf}{\vskip 0.1 true in \noindent \underbar{Solution}}
+%\newcommand{\solutionp}{\noindent \underbar{Solution} \newline \indent}
+%\newcommand{\booksolution}{\noindent{\it Solution}. }
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\spectrum}{\mathrm{Sp}}
+%\newcommand{\subset}{\subseteq}
+\newcommand{\supp}{{\textup{supp}}}
+\newcommand{\trans}{{\text{T}}}
+\newcommand{\T}{{\mathbb{T}}}
+\newcommand{\Tb}{{\mathbf{T}}}
+\newcommand{\Tc}{{\mathcal{T}}}
+\newcommand{\Tt}{{\textup{T}}}
+\newcommand{\Top}{{\mathcal{T}}}
+\newcommand{\takeaway}{\hskip 0.8 pt \backslash \hskip 0.8 pt}
+\newcommand{\tensor}{\otimes}
+\newcommand{\textm}{{\mathrm{m}}}
+\newcommand{\thetahat}{\widehat{\theta}}
+\newcommand{\thetalambdahat}{\widehat{\theta_\lambda}}
+\newcommand{\thetaMhat}{\widehat{\theta_M}}
+\newcommand{\transpose}{{\mathrm{T}}}
+\newcommand{\trace}{{\mathrm{trace}}}
+\newcommand{\spaceback}{\hskip -1.2 true pt}
+\newcommand{\tripnorm}[1]{{{|}\spaceback{|}\spaceback{|} #1
+                           {|}\spaceback{|}\spaceback{|}}}
+%\newcommand{\tripnorm}[1]{{{|}\!{|}\!{|} #1 {|}\!{|}\!{|}}}
+\newcommand{\quadnorm}[1]{{{|}\spaceback{|}\spaceback{|}\spaceback{|} #1
+                           {|}\spaceback{|}\spaceback{|}\spaceback{|}}}
+\newcommand{\Uc}{{\mathcal{U}}}
+\newcommand{\uni}{{\mathrm{u}}}
+\newcommand{\vhat}{\widehat{v}}
+\newcommand{\vlambdahat}
+    {v_\lambda \hskip -8.5pt \widehat{\phantom{v}} \hskip 2.5 pt}
+\newcommand{\itsyvertrule}{\rule{0pt}{5.2pt}}
+\newcommand{\tiniestvertrule}{\rule{0pt}{6.8pt}}
+\newcommand{\tiniervertrule}{\rule{0pt}{8.2pt}}
+\newcommand{\tinyvertrule}{\rule{0pt}{8.8pt}}
+\newcommand{\smallvertrule}{\rule{0pt}{9.5pt}}
+\newcommand{\smallervertrule}{\rule{0pt}{9.6pt}}
+\newcommand{\medvertrule}{\rule{0pt}{9.8pt}}
+\newcommand{\meddervertrule}{\rule{0pt}{10.1pt}}
+\newcommand{\vertrule}{\rule{0pt}{10.4pt}}
+\newcommand{\bigvertrule}{\rule{0pt}{10.8pt}}
+\newcommand{\biggervertrule}{\rule{0pt}{11.8pt}}
+\newcommand{\biggestvertrule}{\rule{0pt}{12.8pt}}
+\newcommand{\Bigvertrule}{\rule{0pt}{13.2pt}}
+%\newcommand{\vertspace}{\phantom{\widehat{\Sigma}\!}}
+\newcommand{\vertspace}{\phantom{\Bigparen{X}\!}}
+\newcommand{\bigvertspace}{\phantom{\Biggparen{X}}\!\!}
+\newcommand{\vol}{{\mathrm{vol}}}
+\newcommand{\what}{\widehat{w}}
+%\newcommand{\wcheck}{\sveecheck{w}}
+\newcommand{\wcheck}{\overset {\scriptscriptstyle{\hskip 1.5 pt \vee}} w}
+\newcommand{\Wc}{{\mathcal{W}}}
+\newcommand{\Wchat}{\widehat{\Wc}}
+%\newcommand{\What}{\swedgehat{W}}
+\newcommand{\What}{W \hskip -9.0pt \widehat{\phantom{T}} \hskip 1.5 pt}
+\newcommand{\Wcheck}{\sveecheck{W}}
+\newcommand{\wlambdahat}
+    {w_\lambda \hskip -10pt \widehat{\phantom{w}} \hskip 2.5 pt}
+\newcommand{\WsubN}{W_{\!N}\tinyback}
+\newcommand{\WN}{W_{\tinyback N}}
+%\newcommand{\weak}{\operatorname{\overset w \to \to}} 
+\newcommand{\weak}{\operatorname{\overset w \to}} 
+\newcommand{\notweak}{{\weak \hskip -9 pt / \hskip 8 pt}}
+\newcommand{\weakstar}{\operatorname{\overset {w\text{*}} \longrightarrow}} 
+%\newcommand{\weakstar}{\operatorname{\overset w\text{*} \to \to}} 
+\newcommand{\Weak}{\textup{Weak-}}
+\newcommand{\widecheck}[1]{\overset{\vee}{#1}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\xhat}{\widehat{x}}
+\newcommand{\xnhat} {x_n \hskip -9pt \widehat{\phantom{x}} \hskip 3 pt}
+\newcommand{\tx}{\widetilde{x}}
+\newcommand{\tX}{\widetilde{X}}
+\newcommand{\X}{X\!}
+\newcommand{\Y}{Y\!}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Zc}{{\mathcal{Z}}}
+\newcommand{\zeroveecheck}
+    {\overset {\lower .4ex \hbox{${\scriptscriptstyle{\hskip 0.5 pt\vee}}$}} 0}
+
+%\newcommand{\indexspacer}{\rule{0pt}{10.6pt}}
+%\newcommand{\indexspacer}{}
+
+\newcommand{\indexspaced}{\rule{0pt}{11.8pt}}
+%\newcommand{\bigindexspacer}{\rule{0pt}{13.9pt}}
+\newcommand{\bigindexspacer}{\rule{0pt}{13.1pt}}
+
+\hyphenation{Bun-ya-kow-ski}
+\hyphenation{spatial}
+
+\newcommand{\solution}{\vskip 0.1 true in \noindent
+\underbar{Solution} \newline \indent}
+\newcommand{\solutionf}{\vskip 0.1 true in \noindent \underbar{Solution}}
+\newcommand{\solutionp}{\noindent \underbar{Solution} \newline \indent}
+\newcommand{\booksolution}{\noindent{\it Solution}. }

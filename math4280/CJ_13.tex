@@ -1,0 +1,143 @@
+\documentclass{article}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]%
+{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm, amsmath, amssymb, tikz}
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage[colorlinks=true,
+linkcolor=blue,citecolor=blue,
+urlcolor=blue]{hyperref}
+
+\usetikzlibrary{calc,shapes, backgrounds}
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{\color{red} Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{open}{\color{red} Open Question}
+
+
+%Question template----------------------------------------
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+        \noindent{\bf \large#2}%
+    \vspace{0.5em} \hrule \vspace{.10in}%
+    \addtocounter{questionCounter}{1}%
+}{}
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+
+
+\begin{document}
+
+
+\begin{center}
+{\Huge Class Journal 13}\\
+\end{center}
+
+\vspace{5mm}
+
+\noindent {\large Lecture Handout 13:}
+
+\vspace{5mm}
+
+\noindent {\large Topic of the lecture: Channel Capacity}
+
+\begin{question}{Main Theorems/Ideas in the lecture}
+This lecture marked the beginning of the formal development of sending and receiving messages through channels. Some of the ideas we had seen before.
+
+Communication, as a transfer of information, is a physical process and therefore is subject to the
+uncontrollable ambient noise and imperfections of the physical signaling process itself. The commu-
+nication is successful if the receiver B and the transmitter A agree on what was sent.
+
+We would like to find the maximum number of distinguishable signals for n uses of a communication channel
+
+Intuitively, channel capcity: logarithm of the number of distinguishable signals.
+
+Key connection: Mutual Information. Understanding this and being able to do break it down into components of entropy are essential especially for actually calculating channel capacity.
+
+Defining a discrete channel now...
+
+A discrete channel consists of\newline
+• input alphabet $X$\newline
+• output alphabet $Y$\newline
+• probability transition matrix $p(y|x)$\newline
+The channel is said to be memoryless if the probability distribution of the output depends only on the
+input at that time and is conditionally independent of previous channel inputs or outputs.
+
+\begin{definition} The ‘information’ channel capacity of a discrete memoryless channel is defined as \begin{gather*}
+    C = \max_{p(X)} I(X;Y)
+\end{gather*}
+where the maximum is taken over all possible input distributions $p(x)$.
+\end{definition}
+\remark ‘Operational’ channel capacity: highest rate in bits per channel use at which information can
+be sent with arbitrarily low probability of error.
+
+In lecture we went over a large amount of examples and visualizations to drive home the actual conceptual idea of channels and their capacity in information theory.
+
+
+ \begin{theorem}
+For a weakly symmetric channel,
+\begin{gather*}
+    C = \log |\mathcal{Y}| - H(row vector of transition matrix)
+\end{gather*}
+this is achieved by a uniform distribution on the input alphabet.
+
+\end{theorem}
+\vspace{5cm}
+
+\end{question}
+
+\begin{question}{Materials that I find confusing or need more clarification/examples}
+
+\vspace{3cm}
+
+\end{question}
+
+\begin{question}{Class journal questions (if there are any in the lecture handout)}
+Using Theorem 1,
+\begin{gather*}
+    \log_2(3) - H(1/3, 1/6, 1/2) = \log_2(3) + 1/3\log_2 1/3 + 1/2\log_2 1/2 + 1/6 \log_2 1/6 \\
+    = 0.12581458369391142406020280530724158771324053717...
+\end{gather*}
+\end{question}
+
+\vspace*{6cm}
+
+\begin{question}{Additional comments/suggestions about the lecture or the instructor}
+
+% {\color{blue}
+
+% \begin{enumerate}
+%     \item Said too many `Ok's.
+%     \item Speak slower.
+% \end{enumerate}
+
+% }
+
+\end{question}
+
+
+
+
+\end{document}

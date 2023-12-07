@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]%
+{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm, amsmath, amssymb, tikz}
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage[colorlinks=true,
+linkcolor=blue,citecolor=blue,
+urlcolor=blue]{hyperref}
+
+\usetikzlibrary{calc,shapes, backgrounds}
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{\color{red} Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{open}{\color{red} Open Question}
+
+
+%Question template----------------------------------------
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+        \noindent{\bf \large#2}%
+    \vspace{0.5em} \hrule \vspace{.10in}%
+    \addtocounter{questionCounter}{1}%
+}{}
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+
+
+\begin{document}
+
+
+\begin{center}
+{\Huge Class Journal (Example)}\\
+\end{center}
+
+\vspace{5mm}
+
+\noindent {\large Lecture Handout \#:}
+
+\vspace{5mm}
+
+\noindent {\large Topic of the lecture: }
+
+\begin{question}{Main Theorems/Ideas in the lecture}
+
+\vspace{5cm}
+
+\end{question}
+
+\begin{question}{Materials that I find confusing or need more clarification/examples}
+
+\vspace{3cm}
+
+\end{question}
+
+\begin{question}{Class journal questions (if there are any in the lecture handout)}
+
+\end{question}
+
+\vspace*{6cm}
+
+\begin{question}{Additional comments/suggestions about the lecture or the instructor}
+
+% {\color{blue}
+
+% \begin{enumerate}
+%     \item Said too many `Ok's.
+%     \item Speak slower.
+% \end{enumerate}
+
+% }
+
+\end{question}
+
+
+
+
+\end{document}

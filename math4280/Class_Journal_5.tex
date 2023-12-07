@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]%
+{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm, amsmath, amssymb, tikz}
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage[colorlinks=true,
+linkcolor=blue,citecolor=blue,
+urlcolor=blue]{hyperref}
+
+\usetikzlibrary{calc,shapes, backgrounds}
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{\color{red} Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{open}{\color{red} Open Question}
+
+
+%Question template----------------------------------------
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+        \noindent{\bf \large#2}%
+    \vspace{0.5em} \hrule \vspace{.10in}%
+    \addtocounter{questionCounter}{1}%
+}{}
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+
+
+\begin{document}
+
+
+\begin{center}
+{\Huge Class Journal 5}\\
+\vspace{4pt}
+\Large Austin Barton
+\end{center}
+
+\vspace{5mm}
+
+\noindent {\large Lecture Handout 5:}
+
+\vspace{5mm}
+
+\noindent {\large Topic of the lecture: Log-sum inequalities and applications}
+
+\begin{question}{Main Theorems/Ideas in the lecture}
+\textbf{Log-sum inequality} For non-negative numbers $a_1,\ldots, a_n$ and $b_1,\ldots, b_n$,
+\begin{gather*}
+    \sum_{i=1}^n a_i \log\frac{a_i}{b_i} \geq \Big( \sum_{i=1}^n a_i\Big) \log \frac{\sum_{i=1}^n a_i}{\sum_{i=1}^n b_i}
+\end{gather*}
+with equality if and only if $\frac{a_i}{b_i}$ are constants.
+
+This is proved by using the fact that $f(t) = t\log t$ is strictly convex and Jensen's inequality. One of its direct uses was in showing the convexity of relative entropy.\smallskip
+
+\textbf{Convexity of relative entropy} $D(p||q)$ is convex in the pair $(p,q)$ i.e. if $(p_1,q_1)$ and $(p_2,q_2)$ are two pairs of probability mass functions, then 
+\begin{gather*}
+    D(\lambda p_1 + (1-\lambda)p_2 || \lambda q_1 + (1-\lambda)q_2) \leq \lambda D(p_1||q_1) + (1-\lambda)D(p_2||q_2)
+\end{gather*}
+where $\lambda \in [0,1]$.\smallskip
+
+This is quickly used to show the concavity of entropy.\smallskip
+
+\textbf{Concavity of entropy} $H(p)$ is a concave function of $p$.\smallskip
+
+The last two previous theorems are then used to show that mutual information is a convex function of the conditional probability between the two random variables for a fixed marginal distribution and concave function of the marginal for fixed conditional.\smallskip
+
+\textbf{Mutual Information concavity and convexity} Suppose $(X,Y)\sim p(x,y) = p(x)p(y|x)$. The mutual information $I(X;Y)$ is a concave function of $p(x)$ for fixed $p(y|x)$ and a convex function of $p(y|x)$ for a fixed $p(x)$.
+\vspace{5cm}
+
+\end{question}
+
+\begin{question}{Materials that I find confusing or need more clarification/examples}
+%I would like clarification on the proof for Concavity of entropy in the textbook. It states that $H(p) = \log|\chi| - D(p||u)$. It makes sense to me, but I am not convinced entirely as I don't recall a proof. I think we may have gone over it in class but I can't find my notes on it. I even used this in the homework as a fact for homework $2$.
+
+In the log-sum inequality, when it says "with equality if and only if $\frac{a_i}{b_i}$ are constants." It means to say when $\frac{a_i}{B_i}$ \underline{are} a constant, correct? Meaning that the ratio between $\frac{a_i}{b_i}$ is a fixed constant for all $i=1,\ldots, n$.
+\vspace{3cm}
+
+\end{question}
+
+\begin{question}{Class journal questions (if there are any in the lecture handout)}
+\textbf{Question 1:} Use the log-sum inequality to show that $D(p||q)\geq 0$.
+
+\begin{proof}
+    Let $\chi$ be the alphabet $p$ is defined on. By definition, 
+    \begin{gather*}
+        D(p||q) = \sum_{x\in \chi}p(x)\log\frac{p(x)}{q(x)}
+    \end{gather*}
+    by the log-sum inequality,
+    \begin{gather*}
+        \sum_{x\in \chi}p(x)\log\frac{p(x)}{q(x)} \geq  \Big(\sum_{x\in \chi}p(x)\Big) \log \frac{\sum_{x\in\chi} p(x)}{\sum_{x\in\chi}q(x)} = \log \frac{1}{\sum_{x\in\chi}q(x)}
+    \end{gather*}
+    But $\sum_{x\in\chi}q(x)\leq 1$. Thus, $\frac{1}{\sum_{x\in\chi}}\geq 1$. Therefore, $\log \frac{1}{\sum_{x\in\chi}}\geq 0$. Therefore, we have,
+    \begin{gather*}
+        D(p||q) \geq 0
+    \end{gather*}
+\end{proof}
+
+\end{question}
+
+\vspace*{6cm}
+
+\begin{question}{Additional comments/suggestions about the lecture or the instructor}
+I would like an aside on cross-entropy in this course if it is possible. I keep seeing things about it but the textbook has nothing on it.
+
+ALSO, the textbook says on page 54 that cross entropy is just another name for relative entropy which from what I've seen on cross entropy, that is false.
+% {\color{blue}
+
+% \begin{enumerate}
+%     \item Said too many `Ok's.
+%     \item Speak slower.
+% \end{enumerate}
+
+% }
+
+\end{question}
+
+
+
+
+\end{document}

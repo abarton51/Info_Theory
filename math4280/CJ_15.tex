@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]%
+{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm, amsmath, amssymb, tikz}
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage[colorlinks=true,
+linkcolor=blue,citecolor=blue,
+urlcolor=blue]{hyperref}
+
+\usetikzlibrary{calc,shapes, backgrounds}
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{\color{red} Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{open}{\color{red} Open Question}
+
+
+%Question template----------------------------------------
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+        \noindent{\bf \large#2}%
+    \vspace{0.5em} \hrule \vspace{.10in}%
+    \addtocounter{questionCounter}{1}%
+}{}
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+
+
+\begin{document}
+
+
+\begin{center}
+{\Huge Class Journal 15}\\
+\end{center}
+
+\vspace{5mm}
+
+\noindent {\large Lecture Handout 15:}
+
+\vspace{5mm}
+
+\noindent {\large Topic of the lecture: Shannon Coding Theorem}
+
+\begin{question}{Main Theorems/Ideas in the lecture}
+This lecture essentially circles back to studying sequences of random variables and the many ideas we've seen on stochastic processes except in the formalized context of channels.
+
+
+\begin{theorem}(Channel coding theorem) For a Discrete Memoryless Channel (DMC),
+\begin{enumerate}
+    \item All rates that are below capacity, $R<C$, are achievable.
+    \item Any sequence of $(2^{nR}, n)$ codes with $\lambda^{(n)}\to 0$ must have $R\leq C$.
+\end{enumerate}
+\end{theorem}
+
+As discussed previously, circling back to some ideas we've seen before. Recall Fano's Inequality,
+\begin{lemma}(Fano's Inequality) For any estimator $\hat X$ such that $X\to Y\to \hat X$, we have that 
+\begin{gather*}
+    H(P_e) + P_e\log|\chi| \geq H(X|\hat X) \geq H(X|Y)
+\end{gather*}
+this can be weakened to,
+\begin{gather*}
+    1 + P_e\log|\chi| \geq H(X|Y)
+\end{gather*}
+or 
+\begin{gather*}
+    p_e \geq \frac{H(X|Y) - 1}{\log |\chi|}
+\end{gather*}
+Note that $W\to X^n(W) \to Y^n \to \hat W$ forms a Markov chain. Hence we have the following,
+\begin{lemma}(Fano's Inequality for DMC) For a discrete memoryless channel with a codebook $C$ and
+the input message $W$ uniformly distributed over $2^nR$, we have
+\begin{gather*}
+    H(W|\hat W) \leq 1 + P_e^{(n)} n R
+\end{gather*}
+\end{lemma}
+
+So this lemma is essentially an extension of what we've seen before but we specified a Markov chain that is formed in a DMC and extended Fano's Inequality to this scenario.
+
+
+We prove a lemma which shows that the capacity per transmission is not increased if we use a discrete
+memoryless channel many times
+
+\begin{lemma}Let $Y^n$ be the result of passing $X^n$ through a discrete memoryless channel of capacity $C$. Then
+\begin{gather*}
+    I(X^n;Y^n) \leq nC \hspace{24pt} \forall p(x^n)
+\end{gather*}
+    
+\end{lemma}
+Okay, so the aggregated mutual information of a sequence through a DMC and its resulting sequence is bounded by the length of the sequences multiplied by the channel capacity. 
+
+\begin{theorem}
+    For a DMC, any sequence of $(2^{nR}, n)$ codes with $\lambda^{(n)} \to 0$ must have $R \leq C$.
+\end{theorem}
+The second statement of the Shannon coding theorem.
+
+
+\end{lemma}
+\vspace{5cm}
+
+\end{question}
+
+\begin{question}{Materials that I find confusing or need more clarification/examples}
+
+\vspace{3cm}
+
+\end{question}
+
+\begin{question}{Class journal questions (if there are any in the lecture handout)}
+N/A
+\end{question}
+
+\vspace*{6cm}
+
+\begin{question}{Additional comments/suggestions about the lecture or the instructor}
+
+% {\color{blue}
+
+% \begin{enumerate}
+%     \item Said too many `Ok's.
+%     \item Speak slower.
+% \end{enumerate}
+
+% }
+
+\end{question}
+
+
+
+
+\end{document}

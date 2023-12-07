@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]%
+{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm, amsmath, amssymb, tikz}
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage[colorlinks=true,
+linkcolor=blue,citecolor=blue,
+urlcolor=blue]{hyperref}
+
+\usetikzlibrary{calc,shapes, backgrounds}
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{\color{red} Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{open}{\color{red} Open Question}
+
+
+%Question template----------------------------------------
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+        \noindent{\bf \large#2}%
+    \vspace{0.5em} \hrule \vspace{.10in}%
+    \addtocounter{questionCounter}{1}%
+}{}
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+
+
+\begin{document}
+
+
+\begin{center}
+{\Huge Class Journal 2}\\
+\vspace{4pt}
+\Large Austin Barton
+\end{center}
+
+\vspace{5mm}
+
+\noindent {\large Lecture Handout 2:}
+
+\vspace{5mm}
+
+\noindent {\large Topic of the lecture: Entropy (Revisited), Joint Entropy, Conditional Entropy}
+
+\begin{question}{Main Theorems/Ideas in the lecture}
+We defined entropy again and discussed its intuitive meaning. We went over the interpretation of entropy as the expected value of the $\log$ of the reciprocal of our random variable's probability mass function. That is, $H(X) = \mathbb{E}(\log \frac{1}{p(X)})$. We went over notation and then we then went over the properties of entropy such as non-negativity. That is, $H(X)\geq 0$.
+
+After, we went into joint and conditional entropy. We defined the joint and conditional entropies. As we defined these entropies, we derived them in a quite intuitive manner, discussing each portion of the definition and why/how it works.
+
+We then showed the proof of the Chain Rule theorem for random variables $X,Y$. It stated that $H(X,Y) = H(X) + H(Y|X)$. We proved this and discussed the interpretation of this theorem in the form of a Venn diagram representing entropy of $X$ and $Y$.
+
+After, we went over an illustrative example of joint and conditional entropy.
+\vspace{5cm}
+
+\end{question}
+
+\begin{question}{Materials that I find confusing or need more clarification/examples}
+I am following along well and I find the Venn Diagram explanations very helpful in understanding the why behind the definitions and theorems we went over, however, I am still a bit confused behind the expected value interpretation of entropy. I see why it is mathematically true, but I can't visualize or reason in my head what $\mathbb{E}(\log(\frac{1}{p(X)}))$ is saying. Especially the $\log$ portion is a function of the probability mass function of $X$ rather than $X$ itself.
+\vspace{3cm}
+
+\end{question}
+
+\newpage
+
+\begin{question}{Class journal questions (if there are any in the lecture handout)}
+$H(Y|X) = -(1/2H(1/4, 1/8, 1/8, 1/2) + 1/4H(1/4,1/2,1/4,0) + 1/8H(1/4,1/4,1/2,0) + 1/8H(1/4,1/4,1/2,0)) \newline
+= \frac{13}{8}$ bits.
+
+$H(X,Y) = 27/8$ bits.
+
+$H(X) = H(X,Y) - H(Y|X) = 7/4$ bits.
+
+$H(Y) = H(X,Y) - H(X|Y) = 2$ bits.
+
+No, $H(X|Y)\neq H(Y|X)$, as we can see above.
+\end{question}
+
+\vspace*{6cm}
+
+\begin{question}{Additional comments/suggestions about the lecture or the instructor}
+Nothing as of right now. Thank you.
+% {\color{blue}
+
+% \begin{enumerate}
+%     \item Said too many `Ok's.
+%     \item Speak slower.
+% \end{enumerate}
+
+% }
+
+\end{question}
+
+
+
+
+\end{document}

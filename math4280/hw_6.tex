@@ -1,0 +1,228 @@
+\documentclass[10pt,twoside]{article}
+\usepackage{amssymb, amsmath, amsthm, amsfonts, epsfig, graphicx, dsfont,
+  bbm, bbold, url, color, setspace, multirow, pinlabel}
+\usepackage[all]{xy}
+
+\usepackage{fancyhdr} \setlength{\voffset}{-1in}
+\setlength{\topmargin}{0in} \setlength{\textheight}{9.5in}
+\setlength{\textwidth}{6.5in} \setlength{\hoffset}{0in}
+\setlength{\oddsidemargin}{0in} \setlength{\evensidemargin}{0in}
+\setlength{\marginparsep}{0in} \setlength{\marginparwidth}{0in}
+\setlength{\headsep}{0.25in} \setlength{\headheight}{0.5in}
+\pagestyle{fancy}
+
+\input{macros}
+
+\newcommand{\Pro}{\ensuremath{\mathbb{P}}}
+\newcommand{\condPro}[2]{\ensuremath{\mathbb{P}}(#1 $|$ #2)}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+
+\onehalfspace
+
+\fancyhead[LO,LE]{{MATH 4280 - Information Theory - Professor Wang} \fancyhead[RO,RE]{Due 0X/XX/2023 at 11:59 pm}}
+\chead{\textbf{}} \cfoot{}
+\fancyfoot[LO,LE]{} \fancyfoot[RO,RE]{Page \thepage\ of
+  \pageref{LastPage}} \renewcommand{\footrulewidth}{0.5pt}
+\parindent 0in
+% ------------------------------------------------------%
+% -------------------Begin Document---------------------%
+% ------------------------------------------------------%
+\begin{document}
+
+\begin{center}
+\huge{\bf{Homework 6} - Austin Barton}
+\end{center}
+
+\medskip
+
+\noindent \large{\textbf{Collaborators: N/A}}
+
+\medskip
+
+\begin{itemize}
+    \item\textbf{Problem 1:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.] 
+    Our channel results in the random $Y$ being the sum of $X$ and $Z$. That is, $Y = X + Z$. $a$ must take on essentially $4$ distinct values. For each value we will find the channel capacity as a separate case. In our notation of $\max$ we assume that $\max$ is over the probability distribution $p(x)$.
+
+    \begin{enumerate}
+        \item $a = 0$. If $a = 0$ then $Y = 0,1$. Further, we know that $Y = 0$ if an only if $X = 0$ and $Y = 1$ if and only if $X = 1$. Expanding the equation for channel capacity
+        \begin{gather*}
+            C = \max I(X;Y) = \max H(X) - H(X|Y)
+        \end{gather*}
+        we note that $H(X|Y) = 0$ since the value of $Y$ tells us the exact value of $X$. That is, $Y$ determines $X$. Thus, the conditional entropy of $X$ given $Y$ must be zero. Therefore, 
+        \begin{gather*}
+            C = \max H(X)
+        \end{gather*}
+        We know that the entropy of a random variable is maximized over the uniform distribution. Since $X$ is a Bernoulli random variable, this means that $\max H(X) = \max H(1/2) = 1$.
+
+        Thus, when $a=0$, our channel capacity is $C = 1$.
+
+        \item $a = 1$. If $a = 1$ then $Y$ must take on values $Y = 0, 1, 2$. We have two inputs and three outputs. Consider
+        \begin{gather*}
+            C = \max H(Y) - H(Y|X)
+        \end{gather*}
+        $H(Y|X)$ is simply $H(1/2)$ since given $X$, the probability lies only in $Z$ in determining. For instance, if $X = 0$, the probability of $Y = 1$ is simply $\Pr(Z = 1) = 1/2$. So this is,
+        \begin{gather*}
+            C = \max H(Y) - H(a) = \max H(Y) - H(1/2)
+        \end{gather*}
+        This is the exact same setup as the binary erasure channel. Instead $e$ being the outcome of erasure, it is the outcome of $Y = 1$. Therefore, 
+        \begin{gather*}
+            C = 1 - a = \frac{1}{2}
+        \end{gather*}
+
+        \item $a = -1$. If $a = -1$ then $Y$ must take on values $Y = -1, 0, 1$. This is essentially the same as the case where $a = 1$ except the outcome that $Y$ can take on in two different ways is $Y = 0$. Therefore, $C = \frac{1}{2}$.
+
+        \item $a \neq 0, 1, -1$. If $a$ is any real number not equal to $0, 1,$ or $-1$, then $Y$ can take on $4$ different values. Those being $Y = 0, 1, a, 1 + a$. Since we know what $a$ is, and $a$ is distinct from $0, 1, -1$, we know that $Y$ takes on four distinct values. Thus, given $X$ we can determine $Y$. Therefore,
+        \begin{gather*}
+            C = \max I(X;Y) = \max H(X) - H(X|Y) = \max H(X) - 0 = \max H(X) = 1
+        \end{gather*}
+        That is, $C =1$.
+        
+    \end{enumerate}
+    \end{proof}
+
+\newpage
+    
+    \item\textbf{Problem 2:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.]
+    \begin{enumerate}
+        \item Consider,
+        \begin{gather*}
+            C = \max I(X;Y) = \max H(Y ) - H(Y|X)
+        \end{gather*}
+        Let's think about $H(Y|X)$. Given $X$, $Y$ can take on one of three values with probability $1/3$ for each. The probability is completely dependent on $Z$ given $X$. Therefore, $H(Y|X) = H(Z) = \log 3$. So we have,
+        \begin{gather*}
+            C = \max H(Y) - \log 3
+        \end{gather*}
+        Now, $Y$ takes on $11$ values, since it is modulo 11, from $0$ to $10$, inclusive. Since $X$ can take any of the values from $0$ to $10$, this is a closed group under addition, adding $Z$ does not change the range of values that $Y$ can take on. That is, for all case of $X$ and $Z$, $Y$ can take on values from $0$ to $10$. The entropy of $Y$ is maximized for the uniform distribution with entropy $\log |\mathcal{Y}|$, where $\mathcal{Y}$ is the alphabet of $Y$. Therefore,
+        \begin{gather*}
+            C = \max H(Y) - \log 3 = \log 11 - \log 3
+        \end{gather*}
+        \item Let's think about $C = \max H(Y) - H(Y|X)$. As discussed previously, given $X$, the entropy of $Y$ is dependent on $Z$, which has the uniform distribution and is fixed. So, the conditional distribution of $Y|X$ is uniform. In order to obtain $C$, we must then make $H(Y)$ term as large as possible since the other term is fixed. So we concluded that the max is achieved when $Y$ is uniform. In order for $Y$ to be uniform, $X$ must also be uniform since we know that $Z$ is uniform and fixed. If $X$ were any other distribution, then $Y$ would not be uniform. Therefore, the max is achieved when $X$ has the uniform distribution.
+    \end{enumerate}
+    \end{proof}
+
+    \newpage
+    
+    \item\textbf{Problem 3:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.]
+    We want to find the channel capacity which is defined in this case as
+    \begin{gather*}
+        \max_{p(x_1, x_2)} C = \max_{p(x_1, x_2)} I(X_1, X_2;Y_1, Y_2)
+    \end{gather*}
+    The channel is defined as
+    \begin{gather*}
+        \Big( \mathcal{X}_1\times \mathcal{X}_2, p(y_1|x_1)p(y_2|x_2),\mathcal{Y}_1\times \mathcal{Y}_2 \Big)
+    \end{gather*}
+    formed from the channels
+    \begin{gather*}
+        \Big(\mathcal{X}_1, p(y_1|x_1), \mathcal{Y}_1 \Big) \\
+        \Big(\mathcal{X}_2, p(y_2|x_2), \mathcal{Y}_2 \Big)
+    \end{gather*}
+    with capacities $C_1, C_2$, respectively. The joint distribution is then
+    \begin{gather*}
+        p(x_1, x_2, y_1, y_2) = p(x_1, x_2)p(y_1|x_1)p(y_2|x_2)
+    \end{gather*}
+    since $p(y_1|x_1)p(y_2|x_2) = p(y_1, y_2|x_1, x_2)$, by conditional independence implied by the channels given. From the joint distribution above, we can see that this describes the definition of the joint distribution for the Markov chain $Y_1 \to X_1 \to X_2 \to Y_2$. Therefore, using the data processing inequality now,
+    \begin{gather*}
+        I(X_1, X_2;Y_1,Y_2) = H(Y_1, Y_2) - H(Y_1, Y_2|X_1, X_2)
+    \end{gather*}
+    But $Y_1|X_1$ is independent of $Y_2|X_2$. Therefore, the joint entropy splits into the sum,
+    \begin{gather*}
+        = H(Y_1, Y_2) - H(Y_1, Y_2|X_1, X_2) \\
+        = H(Y_1, Y_2) - (H(Y_1|X_1) + H(Y_2|X_2)) \\
+        = H(Y_1, Y_2) - H(Y_1|X_1) - H(Y_2|X_2)
+    \end{gather*}
+    Now, $H(Y_1, Y_2)\leq H(Y_1) + H(Y_2)$. 
+    
+    This can be shown by using the entropy chain rule $H(Y_1, Y_2) = H(Y_1) + H(Y_2 | Y_1)$. By information can't hurt we know that $H(Y_2|Y_1)\leq H(Y_2)$. So, $H(Y_1, Y_2)\leq H(Y_1) + H(Y_2)$ with equality if $Y_1$ and $Y_2$ are independent.
+
+    So we have,
+    \begin{gather*}
+        H(Y_1, Y_2) - H(Y_1|X_1) - H(Y_2|X_2) \\
+        \leq H(Y_1) + H(Y_2) - H(Y_1|X_1) - H(Y_2|X_2)
+    \end{gather*}
+    And this is
+    \begin{gather*}
+        = H(Y_1) - H(Y_1|X_1) + H(Y_2) - H(Y_2|X_2) \\
+        = I(X_1;Y_1) + I(X_2;Y_2)
+    \end{gather*} 
+    That is,
+    \begin{gather*}
+        I(X_1, X_2;Y_1, Y_2)\leq I(X_1;Y_1) + I(X_2;Y_2)
+    \end{gather*}
+    So then,
+    \begin{gather*}
+        \max_{p(x_1, x_2)}I(X_1, X_2;Y_1, Y_2) \leq \max_{p(x_1, x_2)}I(X_1;Y_1) + \max_{p(x_1, x_2)}I(X_2;Y_2) \\
+        = \max_{p(x_1)}I(X_1;Y_1) + \max_{p(x_2)}I(X_2;Y_2)
+    \end{gather*}
+    Since $I(X_1;Y_1)$ is dependent only on $x_1$ and $I(X_2;Y_2)$ is dependent only on $x_2$. Thus,
+    \begin{gather*}
+        C \leq C_1 + C_2
+    \end{gather*}
+
+    Consider when $X_1$ and $X_2$ are independent. Then, 
+    \begin{gather*}
+        I(X_1, X_2;Y_1, Y_2) = I(X_1;Y_1, Y_2) + I(X_2;Y_1, Y_2|X_1) \\
+        = I(X_1;Y_1) + I(X_2;Y_2)
+    \end{gather*}
+    Therefore, when $X_1$ and $X_2$ are independent, 
+    \begin{gather*}
+        C = C_1 + C_2
+    \end{gather*}
+    This gives us our channel capacity $C$ for channel \newline$\Big( \mathcal{X}_1\times \mathcal{X}_2, p(y_1|x_1)p(y_2|x_2),\mathcal{Y}_1\times \mathcal{Y}_2 \Big)$.
+    
+    \end{proof}
+
+    \newpage
+    
+    \item\textbf{Problem 4:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.]
+    \begin{enumerate}
+        \item 
+    Notice that this statistician forms a Markov chain
+    \begin{gather*}
+        X \to Y \to \hat Y
+    \end{gather*}
+    From Chapter $2$, we showed the Data Processing Inequality which states that for any such Markov chain,
+    \begin{gather*}
+        I(X;Y)\geq I(X;\hat Y)
+    \end{gather*}
+     The channel capacity is defined as
+    \begin{gather*}
+        \hat C = \max_{p(x)} I(X;\hat Y) \leq \max_{p(x)}I(X;Y) = C
+    \end{gather*}
+    Therefore, they are wrong.
+    \item The conditions for which they do not strictly decrase the capacity are when 
+    \begin{gather*}
+        I(X;Y) = I(X;\hat Y)
+    \end{gather*}
+    Which occurs if and only if 
+    \begin{gather*}
+        I(X;Y|\hat Y) = 0
+    \end{gather*}
+    Assume $I(X;Y|\hat Y)$. Using the chain rule,
+    \begin{gather*}
+        I(X;Y, \hat Y) = I(X;\hat Y) +  I(X;Y|\hat Y) = I(X;Y) + I(X;\hat Y|Y) \\
+        \Rightarrow I(X;\hat Y) = I(X;Y)
+    \end{gather*}
+    Since, as shown $I(X;Y|\hat Y) = 0$ when there is equality and since $g$ is a function of $Y$, clearly, $I(X;\hat Y|Y) = 0$.
+    
+    Assume $I(X;Y) = I(X;\hat Y)$. Then, again, by using the chain rule, we quickly see that this means,
+    \begin{gather*}
+        I(X;Y,\hat Y) = I(X;\hat Y) = I(X;Y) + I(X;\hat Y|Y)
+        \\
+        \Rightarrow I(X;Y) = I(X;\hat Y)
+    \end{gather*}
+    Therefore, it doesn't strictly decrease when $\hat Y$ and $Y$ determine each other.
+    
+    \end{enumerate}
+    \end{proof}
+\end{itemize}
+
+\label{LastPage}
+\end{document}

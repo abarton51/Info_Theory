@@ -1,0 +1,161 @@
+\documentclass[10pt,twoside]{article}
+\usepackage{amssymb, amsmath, amsthm, amsfonts, epsfig, graphicx, dsfont,
+  bbm, bbold, url, color, setspace, multirow, pinlabel}
+\usepackage[all]{xy}
+
+\usepackage{fancyhdr} \setlength{\voffset}{-1in}
+\setlength{\topmargin}{0in} \setlength{\textheight}{9.5in}
+\setlength{\textwidth}{6.5in} \setlength{\hoffset}{0in}
+\setlength{\oddsidemargin}{0in} \setlength{\evensidemargin}{0in}
+\setlength{\marginparsep}{0in} \setlength{\marginparwidth}{0in}
+\setlength{\headsep}{0.25in} \setlength{\headheight}{0.5in}
+\pagestyle{fancy}
+
+\input{macros}
+
+\newcommand{\Pro}{\ensuremath{\mathbb{P}}}
+\newcommand{\condPro}[2]{\ensuremath{\mathbb{P}}(#1 $|$ #2)}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+
+\onehalfspace
+
+\fancyhead[LO,LE]{{MATH 4280 - Information Theory - Professor Wang} \fancyhead[RO,RE]{Due 0X/XX/2023 at 11:59 pm}}
+\chead{\textbf{}} \cfoot{}
+\fancyfoot[LO,LE]{} \fancyfoot[RO,RE]{Page \thepage\ of
+  \pageref{LastPage}} \renewcommand{\footrulewidth}{0.5pt}
+\parindent 0in
+% ------------------------------------------------------%
+% -------------------Begin Document---------------------%
+% ------------------------------------------------------%
+\begin{document}
+
+\begin{center}
+\huge{\bf{Homework 3} - Austin Barton}
+\end{center}
+
+\medskip
+
+\noindent \large{\textbf{Collaborators: N/A}}
+
+\medskip
+
+\begin{itemize}
+    \item\textbf{Problem 1:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{enumerate}
+        \item Yes. Let $X^n\in A^n$. Then 
+        \begin{gather*}
+            |-\frac{1}{n} \log p(X^n) - H| \leq \epsilon \\
+            -\epsilon   \leq   -\frac{1}{n} \log p(X^n) - H \leq \epsilon \\
+            H - \epsilon \leq -\frac{1}{n} \log p(X^n) \leq H + \epsilon \\
+            -n(H + \epsilon) \leq \log p(X^n) \leq -n(H - \epsilon) \\
+            2^{-n(H+\epsilon)} \leq p(X^n) \leq 2^{-n(H - \epsilon)}
+        \end{gather*}
+        but by definition, this means that $X^n\in A_{\epsilon}^{(n)}$. Therefore, $A^n\subseteq A_{\epsilon}^{(n)}$. Similarly, take $X^n\in  A_{\epsilon}^{(n)}$. Then, $H - \epsilon \leq -\frac{1}{n}\log p(X^n) \leq H + \epsilon$ which implies that $X^n\in A^n$. 
+
+        Therefore, $A^n = A_{\epsilon}^{(n)}$. 
+
+        We then know that $\Pro(X^n\in A^n) > 1 - \epsilon$ for $n$ sufficiently large, for any $\epsilon$. By definition and AEP, this means that $\Pro(X^n \in A^n) \to 1$.
+        
+        \item Yes. The strong law of large numbers states that for any $X^n$, (i.i.d. random variables from $1$ to $n$), that the sample mean converges to the expected value of any one of the $X_i$ almost surely. That is, $\Pro(\lim_{n\to \infty} \overline{X^n} = \mu) = 1$.
+        
+        Note that by the definition of $B^n$ and the strong law of large numbers, \newline
+        $\Pro(X^n\in B^n)\to 1$. 
+
+        Consider $X^n\in A^n\cap B^n$. Since we have that $\Pro(X^n\in A^n)\to 1$ and $\Pro(X^n \in X^n)\to 1$, it must be true that $\Pro(X^n\in A^n\cap B^n)\to 1$.
+        
+        \item \begin{proof}[Answer.]
+            First, we will show that $A^n\cap B^n\subseteq A_{\epsilon}^{(n)}$. Consider $\bar{x}\in A^n\cap B^n$. Then, 
+            \begin{gather*}
+                |-\frac{1}{n}\log p(\bar{x}) - H|\leq \epsilon \\
+                -\epsilon \leq -\frac{1}{n}\log p(\bar{x}) - H \leq \epsilon \\
+                H-\epsilon \leq -\frac{1}{n}\log p(\bar{x}) \leq H +\epsilon \\
+                -n(H + \epsilon) \leq \log p(\bar{x}) \leq -n(H - \epsilon) \\
+                2^{-n(H + \epsilon)} \leq \bar{x} \leq 2^{ -n(H - \epsilon)}
+            \end{gather*}
+            Thus, by definition (page 59), $\bar{x}\in A_{\epsilon}^{(n)}$. Therefore, $A^n\cap B^n\subseteq  A_{\epsilon}^{(n)}$. Therefore, 
+            \begin{gather*}
+                |A^n\cap B^n|\leq  |A_{\epsilon}^{(n)}| \leq 2^{n(H+\epsilon)}
+            \end{gather*}
+            Where we used Theorem 3.1.2 which states that $| A_{\epsilon}^{(n)}|\leq  2^{n(H+\epsilon)}$ and the fact that a subset must contain no more elements than the set it is contained in. This shows that, 
+            \begin{gather*}
+                |A^n\cap B^n|\leq  2^{n(H+\epsilon)}
+            \end{gather*}
+            for all $n$.
+        \end{proof}
+        
+        \item \begin{proof}
+            From part (b) we have that $\Pro(X^n\in A^n\cap B^n)\to 1$. Therefore, from the definition of convergence of a sequence, there exists an $N\in \N$ such that for all $n\geq N$,
+            \begin{gather*}
+                \Pro(X^n\in A^n\cap B^n) \geq \frac{1}{2}
+            \end{gather*}
+            We will refer to all $n\geq N$ as $n$ sufficiently large.
+            
+            From part (c), we know that $A^n\cap B^n\subseteq A_{\epsilon}^{(n)}$. Therefore, for any $\bar{x}\in A^n\cap B^n$, we know $\bar{x}\in A_{\epsilon}^{(n)}$, and from the definition of the typical set, we have that \newline$p(\bar{x})\leq 2^{-n(H - \epsilon)}$. Putting this together, we have that
+            \begin{gather*}
+                \frac{1}{2} \leq p(\bar{x})\leq 2^{-n(H - \epsilon)}
+            \end{gather*}
+            Summing over all possible $\bar{x}\in A^n\cap B^n$, we get,
+            \begin{gather*}
+                \frac{1}{2}\leq \sum_{\bar{x}\in A^n\cap B^n} p(\bar{x})\leq \sum_{\bar{x}\in A^n\cap B^n} 2^{-n(H - \epsilon)} = |A^n\cap B^n|2^{-n(H - \epsilon)} \\
+                \frac{1}{2} \leq |A^n\cap B^n|2^{-n(H - \epsilon)} \\
+                \Rightarrow \frac{1}{2}2^{n(H-\epsilon)} \leq |A^n\cap B^n| \\
+            \end{gather*}
+            as required.
+        \end{proof}
+        
+    \end{enumerate}
+
+    \newpage
+    
+    \item\textbf{Problem 2:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{enumerate}
+        \item \begin{proof}
+            For this, we follow a very similar procedure to the proof of the 3rd property in Theorem 3.1.2.
+
+            Consider, 
+            \begin{gather*}
+                1 =  \sum_{\bar{x}\in \chi^n} p(\bar{x}) \geq  \sum_{\bar{x}\in C_n(t)} p(\bar{x}) \geq \sum_{\bar{x}\in C_n(t)} 2^{-nt}
+            \end{gather*}
+            since each $\bar{x}\in C_n(t)$ by definition satisfies $p(\bar{x})\geq 2^{-nt}$. Continuing,
+            \begin{gather*}
+                 \sum_{\bar{x}\in C_n(t)} 2^{-nt} = |C_n(t)|2^{-nt}
+            \end{gather*}
+            So we have,
+            \begin{gather*}
+                1 \geq |C_n(t)|2^{-nt}
+            \end{gather*}
+            which implies that,
+            \begin{gather*}
+                2^{nt} \geq |C_n(t)|
+            \end{gather*}
+            as required.
+        \end{proof}
+
+        \item \begin{proof}
+            The asymptotic equipartition property tells us that 
+            \begin{gather*}
+                -\frac{1}{n}\log p(X^n) \to H(X)
+            \end{gather*}
+            as $n\to \infty$. That is,
+            \begin{gather*}
+                p(X^n) \to 2^{-nH(X)}
+            \end{gather*}
+            
+            We know that from the definition of $C_n(t)$, if $X^n\in C_n(t)$, then $p(X^n) \geq 2^{-nt}$. So, for $X^n\in C_n(t)$, we have that $p(X^n)\geq 2^{-nt}$, and if we want to find values of $t$ such that $\Pro(X^n\in C_n(t))\to 1$, then $t$ must be a value that satisfies the AEP and the inequality given in $C_n(t)$. 
+            
+            If $t = H(X)$, then $\Pro(X^n\in C_n(t))\to 1$ by AEP.
+            
+            If $t > H(X)$, then we see that $p(X^n)\to 2^{-nH(X)}$ still satisfies the inequality $p(X^n)\geq 2^{-nt}$ since $2^{-nt} < 2^{-nH(X)}$ in this case.
+            
+            However if $t<H(X)$, then $2^{-nt} > 2^{-nH(X)}$ and thus, since $p(X^n)$ converges to $2^{-nH(X)}$, it must reach an $N$ such that for all $N\geq n$ we have that $p(X^n) < 2^{-nt}$ which means that $X^n\not\in C_n(t)$.
+
+            Therefore, $\Pro(X^n\in C_n(t))\to 1$ for $t \geq H(X)$.
+        \end{proof}
+        
+    \end{enumerate}
+\end{itemize}
+
+\label{LastPage}
+\end{document}

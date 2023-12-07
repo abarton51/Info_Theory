@@ -1,0 +1,276 @@
+\documentclass[10pt,twoside]{article}
+\usepackage{amssymb, amsmath, amsthm, amsfonts, epsfig, graphicx, dsfont, geometry, bbm, bbold, url, color, setspace, multirow, pinlabel}
+\usepackage[all]{xy}
+
+\usepackage{fancyhdr} \setlength{\voffset}{-1in}
+\setlength{\topmargin}{0in} \setlength{\textheight}{9.5in}
+\setlength{\textwidth}{6.5in} \setlength{\hoffset}{0in}
+\setlength{\oddsidemargin}{0in} \setlength{\evensidemargin}{0in}
+\setlength{\marginparsep}{0in} \setlength{\marginparwidth}{0in}
+\setlength{\headsep}{0.25in} \setlength{\headheight}{0.5in}
+\pagestyle{fancy}
+
+\input{macros}
+
+\newcommand{\Pro}{\ensuremath{\mathbb{P}}}
+\newcommand{\condPro}[2]{\ensuremath{\mathbb{P}}(#1 $|$ #2)}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+
+\onehalfspace
+
+\fancyhead[LO,LE]{{MATH 4280 - Information Theory - Professor Wang} \fancyhead[RO,RE]{Due 0X/XX/2023 at 11:59 pm}}
+\chead{\textbf{}} \cfoot{}
+\fancyfoot[LO,LE]{} \fancyfoot[RO,RE]{Page \thepage\ of
+  \pageref{LastPage}} \renewcommand{\footrulewidth}{0.5pt}
+\parindent 0in
+% ------------------------------------------------------%
+% -------------------Begin Document---------------------%
+% ------------------------------------------------------%
+\begin{document}
+
+\begin{center}
+\huge{\bf{Homework 2} - Austin Barton}
+\end{center}
+
+\medskip
+
+\noindent \large{\textbf{Collaborators: N/A}}
+
+\medskip
+
+\begin{itemize}
+    \item\textbf{Problem 1:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{enumerate}
+        \item \begin{proof}[Answer.] 
+    First we will show that $H(Z|X) = H(Y|X)$. Consider,
+
+    \begin{gather*}
+        H(Z,Y|X) = H(Z|X) + H(Y|X,Z) \\
+        H(Z,Y|X) = H(Y|X) + H(Z|X, Y)
+    \end{gather*}
+    which is a direct application of a corollary (page 18) that follows the chain rule of entropy (Theorem 2.2.1). Consider, the entropy $H(Y|X,Z)$. Since $X$ and $Z$ are both given (known), there must be know entropy of $Y$ since $Y = Z - X$. That is, $H(Y|X,Z) = H(Y|Y) = 0$. Similarly, consider $H(Z|X,Y)$. Since $Z = X+Y$, then if $X$ and $Y$ are given then $Z$ is given. That is, $H(Z|X,Y) = H(Z|Z) = 0$.
+
+    Therefore, we have
+    \begin{gather*}
+        H(Z,Y|X) = H(Z|X) \\
+        H(Z,Y|X) = H(Y|X) 
+    \end{gather*}
+    Thus, $H(Z|X) = H(Y|X)$ where $Z = X+Y$.
+
+    Now, assume that $X,Y$ are independent. We will show that $H(X) \leq H(Z)$ and $H(Y)\leq H(Z)$.
+
+    Consider, 
+    \begin{gather*}
+        H(X,Y,Z) = H(X) + H(Y,Z|X) \hspace{20pt} \text{(Chain Rule)} \\
+        H(X,Y,Z) = H(X) + H(Y|X) = H(X) + H(Z|X)
+    \end{gather*}
+    from what we showed earlier. Now using the chain rule again as $H(Z|X) = H(X,Z) - H(X)$ and $H(Y|X) = H(X,Y) - H(X)$ we obtain,
+    \begin{gather*}
+        H(X,Y,Z) = H(X) + H(X,Y) - H(X) = H(X) + H(X,Z) - H(X) \\
+        H(X,Y,Z) = H(X,Y) = H(X,Z)
+    \end{gather*}
+    So we have that,
+    \begin{gather*}
+        H(X,Y) = H(X,Z)
+    \end{gather*}
+    By our assumption that $X$ and $Y$ are independent, the joint entropy of $X,Y$ splits into the sum of their entropies. And expanding $H(X,Z)$ out using the chain rule, we get, 
+    \begin{gather*}
+        H(X,Y) = H(X) + H(Y) = H(Z) + H(X|Z)
+    \end{gather*}
+    subtracting both sides by $H(X|Z)$ we get,
+    \begin{gather*}
+        H(X) - H(X|Z) + H(Y) = H(Z)
+    \end{gather*}
+    By definition of mutual information, it follows that $H(X) - H(X|Z) = I(X;Z)$. This is shown on page 21. Thus,
+    \begin{gather*}
+        I(X;Z) + H(Y) = H(Z)
+    \end{gather*}
+    By Theorem 2.6.3 (and the Corollary on page 28 that explicitly states it), mutual information is non-negative. That is, $I(X;Z)\geq 0$. Therefore, 
+    \begin{gather*}
+        H(Y) \leq H(Z)
+    \end{gather*}
+    Similarly, consider, 
+    \begin{gather*}
+        H(X,Y,Z) = H(Y) + H(X,Z|Y) \\
+        H(X,Y,Z) = H(Y) + H(Z|Y) + H(X|Z,Y) = H(Y) + H(Z|Y) \\
+        H(X,Y,Z) = H(Y) + H(X|Y) + H(Z|X,Y) = H(Y) + H(X|Y)
+    \end{gather*}
+    where we used the chain rule for entropy. Continuing,
+    \begin{gather*}
+        H(Y) + H(Z|Y) = H(Y) + H(X|Y) \\
+        H(Y) + H(Z, Y) - H(Y) = H(Y) + H(X,Y) - H(Y) \\
+        H(Z,Y) = H(X,Y)
+    \end{gather*}
+    where we used the chain rule again as we did before. Now, expanding using the chain rule again and using our assumption that $X$ and $Y$ are independent,
+    \begin{gather*}
+        H(Z,Y) = H(Z) + H(Y|Z) = H(X,Y) = H(X) + H(Y) \\
+        H(Z) + H(Y|Z) = H(X) + H(Y)
+    \end{gather*}
+    subtracting both sides by $H(Y|Z)$ we obtain,
+    \begin{gather*}
+        H(Z) = H(X) + H(Y) - H(Y|Z)
+    \end{gather*}
+    Since $H(Y) - H(Y|Z) = I(Y;Z)\geq 0$, 
+    \begin{gather*}
+        H(Z) \geq H(X)
+    \end{gather*}
+    as required.
+    
+    \end{proof}
+
+    \item \begin{proof}[Answer.] Let $X$ and $Y$ be random variables. Consider the following joint distribution.
+    \begin{gather*}
+        \Pro(X = 1, Y=-1) = 3/8 \\
+        \Pro(X = 1, Y=-2) = 1/16 \\
+        \Pro(X = 2, Y=-1) = 1/16 \\
+        \Pro(X= 2, Y=-2) = 1/2
+    \end{gather*}
+    We can see that they are dependent since $\Pro(X = 1, Y=-1) = 3/8$ but $\Pro(X = 1)\Pro(Y = -1) =  25/256$.
+
+    $Z = X+Y$. So, $Z$ takes on values in the set $\set{-1, 1, 0}$. The pmf of $Z$ is,
+    \begin{gather*}
+        \Pro(Z = -1) = \Pro(X = 1, Y = -2) = 1/16 \\
+        \Pro(Z = 0) = \Pro(X = 1, Y = -1) + \Pro(X = 2, Y = -2) = 7/8 \\
+        \Pro(Z = 1) = \Pro(X = 2, Y = -1) = 1/16
+    \end{gather*}
+
+    Calculating the entropy of $X$ directly,
+    \begin{gather*}
+        H(X) = -\Big( 7/16\log(7/16) + 9/16\log(9/16) \Big) \approx 0.9887 \\
+        H(Y) = -\Big( 7/16\log(7/16) + 9/16\log(9/16) \Big) \approx 0.9887 \\
+        H(Z) = -\Big( 2/16\log(1/16) + 7/8\log(7/8)   \Big) \approx  0.543
+    \end{gather*}
+    And so, $H(X) > H(Z)$ and $H(Y) > H(Z)$ where $X,Y$ are dependent random variables and $Z = X+Y$.
+    \end{proof}
+
+    \item\begin{proof}[Answer.]
+
+    $H(Z) = H(X) + H(Y)$ when the entropy of $Y$ given $Z$ or the entropy of $X$ given $Z$ is exactly $0$ and $X,Y$ are independent. This conclusion was made form our calculation in (a.).
+        
+    \end{proof}
+    
+    \end{enumerate}
+
+    \newpage
+    
+    \item\textbf{Problem 2:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    
+    \begin{proof}[Answer.]
+    Consider, 
+    \begin{gather*}
+        I(X_1;X_2,\ldots, X_n) = I(X_2,\ldots, ;X_n;X_1)
+    \end{gather*}
+    by symmetry of mutual information. Now, using the chain rule for information,
+    \begin{gather*}
+        I(X_2,\ldots, X_n;X_1) = I(X_2;X_1) + I(X_3;X_1|X_2) + I(X_4;X_1|X_3, X_2) +  \\
+        \cdots + I(X_n;X_1|X_{n-1},\ldots, X_2)
+    \end{gather*}
+    We know that $X_1\rightarrow X_2\rightarrow\cdots \rightarrow X_n$ forms a Markov chain in that order. This means that $X_n$ is conditionally independent of $X_1$ given $X_2,\ldots, X_{n-1}$, by definition. Further, $X_1\rightarrow\cdots \rightarrow X_i$ forms a Markov chain for any $i = 2,\ldots, n$. Therefore, $X_i$ is conditionally independent of $X_1$ given $X_2,\ldots, X_{i-1}$. We know that the information between two random variables $X$ and $Y$ is $I(X;Y) = 0$ if and only if they are independent (Corollary (2.90) page 28). Therefore, $I(X_i;X_1|X_{i-1},\ldots, X_2) = 0$ for $i>2$.
+
+    As we can see in our expansion of $I(X_2,\ldots, X_n;X_1)$, by use of the chain rule for information, that each term with $i>2$ is of the form $I(X_i;X_1|X_{i-1},\ldots, X_2)$. We explained that each of these $X_i$, for $2<i\leq n$, is conditionally independent of $X_1$ given $X_2,\ldots, X_{i-1}$. Therefore, $I(X_i;X_1|X_{i-1},\ldots, X_2) = 0$ for $i>2$ and we are left with
+    \begin{gather*}
+        I(X_2,\ldots, X_n;X_1) = I(X_2;X_1)
+    \end{gather*}
+    
+    \end{proof}
+
+    \newpage
+    
+    \item\textbf{Problem 3:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    
+    \begin{proof}[Answer.]
+    We want to show that 
+    \begin{gather*}
+        H(p_1,\ldots, p_i,\ldots, p_j,\ldots, p_m) \leq H(p_1,\ldots, \frac{p_i + p_j}{2}, \ldots, \frac{p_i+p_j}{2}, \ldots, p_m)
+    \end{gather*}
+    We know, from page 32, that $H(p)$ is a concave function of $p$, where $p$ is a probability distribution defined on the alphabet $\chi$, and,
+    \begin{gather*}
+        H(p) = \log|\chi| - D(p||u)
+    \end{gather*}
+    where $u$ is the uniform distribution on $\chi$. Let $q$ be a probability distribution on $\chi$, then if $D(q||u)>D(p||u)$, then $H(q) < H(p)$. In this case, we say that the distribution $p$ is more uniform than $q$.
+    
+    Now, let $(p_1,\ldots, p_i, \ldots, p_j, \ldots, p_m) = P$ and $(p_1,\ldots, \frac{p_i + p_j}{2}, \ldots,  \frac{p_i + p_j}{2}, \ldots, p_m ) = Q$. We can see that $P$ and $Q$ are defined on the same alphabet, call it $\chi$. Now, consider,
+    \begin{gather*}
+        H(P) = \log |\chi| - D(P||u) \\
+        H(Q) = \log |\chi| - D(Q||u)
+    \end{gather*}
+    where $u$ is defined on the same alphabet $\chi$ as $P$ and $Q$. Will will now show that $H(P) < H(Q)$. Consider,
+    \begin{gather*}
+        H(P) = -\sum_{k=1}^m p_k\log p_k   \\
+        H(Q) = -\Big( \sum_{k'=1; k'\neq i,j}^m p_{k'}\log p_{k'} + \frac{p_i + p_j}{2}\log ( \frac{p_i + p_j}{2} ) + \frac{p_i + p_j}{2} \log (\frac{p_i + p_j}{2} )  \Big) \\
+        = -\Big( \sum_{k'=1; k'\neq i,j}^m p_{k'}\log p_{k'} + (p_i + p_j)\log (\frac{p_i + p_j}{2}) \Big)
+    \end{gather*}
+
+    Since $P=Q$ for each $k=1,\ldots, m$ where $k\neq i,j$, $H(Q)-H(P)$ is easily calculated as,
+    \begin{gather*}
+        H(Q) - H(P) = -(p_i + p_j)\log (\frac{p_i + p_j}{2}) + p_i\log p_i + p_j\log p_j
+    \end{gather*}
+    where all the terms $k\neq i,j$ from $k=1,\ldots, m$ cancel out to exactly $0$ since they are equal.
+
+    Let $f$ be a function $f:\R\to\R$ defined as $f(t) = t\log t$. Let $t_i,t_j\in \R$. Then, by the log-sum inequality,
+    \begin{gather*}
+        t_i\log t_i + t_j\log t_j \geq (t_i + t_j)\log (t_i + t_j)
+    \end{gather*}
+    Additionally, since $\log$ is a strictly increasing function, $\log(\frac{p_i + p_j}{2}) < \log (p_i + p_j)$. Since we by convention let $\log(0) = 0$, $\log$ is then a monotonically increasing function and $\log(\frac{p_i + p_j}{2}) \leq \log (p_i + p_j)$. Therefore, 
+    \begin{gather*}
+        -(p_i + p_j)\log (\frac{p_i + p_j}{2}) + p_i\log p_i + p_j\log p_j \\
+        \geq  -(p_i + p_j)\log (p_i + p_j) + p_i\log p_i + p_j\log p_j \geq 0
+    \end{gather*}
+    Thus, $H(Q) - H(P) \geq 0$ which shows that $H(Q) \geq H(P)$, as required.
+    
+    \end{proof}
+
+\newpage
+    
+    \item\textbf{Problem 4:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{enumerate} 
+    \item\begin{proof}[Answer.]
+    We want to find the estimator $\hat{X}(Y)$ which estimates $X$ that minimizes the probability of error. The values that $X$ takes on with the most probability given $Y$ are the estimates that our estimator should take on for each value $Y$ takes on since our estimator is a function of $Y$. By inspection we see that this esimator is
+    \begin{gather*}
+        \hat{X}(Y) = \begin{cases}
+        1, \text{if $Y=a$} \\
+        2, \text{if $Y = b$} \\
+        3, \text{if $Y = c$}
+        \end{cases}
+    \end{gather*}
+
+    \begin{gather*}
+        P_e = \Pro(\hat{X}(Y)\neq X) \\
+        = \Pro(\hat{X}(Y) = 2, Y=a) + \Pro(\hat{X}(Y) = 3, Y=a) + \Pro(\hat{X}(Y)= 1, Y=b)\\
+        + \Pro(\hat{X}(Y) = 3, Y=b) + \Pro(\hat{X}(Y) = 1, Y=c) + \Pro(\hat{X}(Y) = 2, Y=c) \\
+        P_e = \frac{1}{2}
+    \end{gather*}
+    
+    \end{proof}
+    \item For this estimator, $P_e = \frac{1}{2}$. Now, first, let's calculate $H(X|Y)$ which, by Fano's inequality, is a lower bound on $H(P_e) + P_e\log|\chi|$ and $H(X|\hat{X})$, where $\chi$ is the alphabet of $X$. Calculating $H(X|Y=y)$ for each $y$
+    \begin{gather*}
+        H(X|Y=a) = H(\frac{1}{2}, \frac{1}{4}, \frac{1}{4}) = 3/2 \\
+        H(X|Y=b) = H(\frac{1}{4}, \frac{1}{2}, \frac{1}{4}) = 3/2  \\
+        H(X|Y=c) = H(\frac{1}{4}, \frac{1}{4}, \frac{1}{2}) = 3/2 
+    \end{gather*}
+    and now calculating $H(X|Y)$,
+    \begin{gather*}
+        H(X|Y) = \sum_yp(y)H(X|Y=y) \\
+        = \frac{1}{3}H(X|Y=a) + \frac{1}{3}H(X|Y=b) + \frac{1}{3}H(X|Y=c) \\
+        = -(\frac{1}{2}\log 1/2 + \frac{1}{2}\log 1/4) = 3/2
+    \end{gather*}
+    The cardinality of $\chi$ is $|\chi| = 3$. Quickly we can calculating $H(P_e) = 1$. Plugging all this into Fano's inequality,
+    \begin{gather*}
+        1 + \frac{1}{2}\log 3 \geq 3/2
+    \end{gather*}
+    which is clearly true. This is just to demonstrate that our estimator does not achieve the lowest possible entropy from Fano's inequality. Also note though that in this case the weaker version of Fano's inequality is the same as the stronger version since $H(P_e) = 1$. Now, solving for the lowest $P_e$ possible from the weaker version of Fano's inequality in order to compare, we get,
+    \begin{gather*}
+       1 + P_{e'}\log 3 = 3/2 \\
+       P_{e'} = \frac{3/2 - 1}{\log 3} \\
+        P_{e'}\approx 0.3155
+    \end{gather*}
+    So $P_e - P_{e'} \approx 0.1845$. Our estimator's probability of error is fairly close to the close to optimal we found.
+    \end{enumerate}
+\end{itemize}
+
+\label{LastPage}
+\end{document}

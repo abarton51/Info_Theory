@@ -1,0 +1,133 @@
+\documentclass{article}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]%
+{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm, amsmath, amssymb, tikz}
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage[colorlinks=true,
+linkcolor=blue,citecolor=blue,
+urlcolor=blue]{hyperref}
+
+\usetikzlibrary{calc,shapes, backgrounds}
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{\color{red} Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{open}{\color{red} Open Question}
+
+
+%Question template----------------------------------------
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+        \noindent{\bf \large#2}%
+    \vspace{0.5em} \hrule \vspace{.10in}%
+    \addtocounter{questionCounter}{1}%
+}{}
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+
+
+\begin{document}
+
+
+\begin{center}
+{\Huge Class Journal 12}\\
+\end{center}
+
+\vspace{5mm}
+
+\noindent {\large Lecture Handout 12:}
+
+\vspace{5mm}
+
+\noindent {\large Topic of the lecture: Optimality of Huffman codes}
+
+\begin{question}{Main Theorems/Ideas in the lecture}
+The overarching theme behind this lecture was about algorithms in order to actually obtain optimal codes for a random variable. We discussed the essential theories behind codes, expected codeword lengths, and inequalities bounding the optimal code of a random variable for uniquely decodable and prefix code. Now we discuss a practical algorithm in order to obtain an optimal code or a code that is very close to being optimal for all practical purposes.
+
+We went over some examples of constructing optimal codes for random variables and the sorts of constraints that we run into when dealing with a differing number of characters to encode the random variable. Additionally, we demonstrated the idea we have seen since the beginning of the course of encoding the shortest codewords to the outcome with the highest probability.
+
+We then discussed how the Huffman code is a series of optimal questions, creating a tree, that minimize the average number of questions. As shown in lecture and the textbook, this series of optimal questions is visually described as a tree.
+
+Some remarks about Shannon code are that, even though it can be practical to use Shannon coding, the codeword lengths may be much worse than the optimal code. Unlike the Huffman code which reaches optimality always. But, that isn't to say that is always true. Shannon coding may reach optimality.
+
+We then proved by induction that the binary Hufmman code is optimal. Without loss of generality, we assumed that $p_1\geq \ldots \geq p_m$.
+
+\begin{lemma} For any distribution, there exists an optimal instantaneous code (with minimum expected length) that satisfies the following properties:
+\begin{enumerate}
+    \item The lengths are ordered inversely with the probabilities (i.e. if $p_j > p_k$, then $l_j \leq l_k$).
+    \item The two longest condewords have the same length.
+    \item Two of the longest codewords differ only in the last bit and correspond to the two least likely symbols.
+\end{enumerate}
+\end{lemma}
+
+\begin{theorem} Huffman coding is optimal; that is, if $C*$ is a Huffman code and $C'$ is any other uniquely decodable code, then $L(C*)\leq L(C')$.
+\end{theorem}
+
+This is unlike the Shannon code which is not guaranteed to be optimal. We discuss this next. For now, we discuss what the above theorem is actually stating. It is not saying that Huffman code makes the best code for all sequences. This is because there are codes that assign short codewords to infrequent source symbols. Which may be expected to be longer but for a sequence which has more of those infrequent symbols, the Huffman code will be longer. The Huffman code is expected (in a probabilstic sense) to be the shortest code. But that doesn't mean it will always be. Dealing with Huffman codes is difficult, since there is no explicit expression for the codeword lengths. We need a robust algorithm to do it. Instead we consider teh Shannon code with codeword lengths $l(x) = \lceil \frac{1}{p(x)}\rceil$.
+
+\begin{theorem}
+    Let $l(x)$ be the codeword lengths associated with the Shannon code, and let $l'(x)$ be the codeword lengths associated with any other uniquely decodable code. Then,
+    \begin{gather*}
+        \Pr(l(x) \geq l'(x) + c) \leq \frac{1}{2^{c-1}}
+    \end{gather*}
+    
+\end{theorem}
+The Shannon is essentially a closed form method of encoding random variables that utilizes a probabilistic inequality to make it so that the code is \emph{probably} clsoe to optimal.
+
+
+
+\vspace{5cm}
+
+\end{question}
+
+\begin{question}{Materials that I find confusing or need more clarification/examples}
+
+\vspace{3cm}
+
+\end{question}
+
+\begin{question}{Class journal questions (if there are any in the lecture handout)}
+
+\end{question}
+
+\vspace*{6cm}
+
+\begin{question}{Additional comments/suggestions about the lecture or the instructor}
+
+% {\color{blue}
+
+% \begin{enumerate}
+%     \item Said too many `Ok's.
+%     \item Speak slower.
+% \end{enumerate}
+
+% }
+
+\end{question}
+
+
+
+
+\end{document}

@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]%
+{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm, amsmath, amssymb, tikz}
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage[colorlinks=true,
+linkcolor=blue,citecolor=blue,
+urlcolor=blue]{hyperref}
+
+\usetikzlibrary{calc,shapes, backgrounds}
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{\color{red} Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{open}{\color{red} Open Question}
+
+
+%Question template----------------------------------------
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+        \noindent{\bf \large#2}%
+    \vspace{0.5em} \hrule \vspace{.10in}%
+    \addtocounter{questionCounter}{1}%
+}{}
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+
+
+\begin{document}
+
+
+\begin{center}
+{\Huge Class Journal 11}\\
+\end{center}
+
+\vspace{5mm}
+
+\noindent {\large Lecture Handout 11:}
+
+\vspace{5mm}
+
+\noindent {\large Topic of the lecture: Bounds on optimal codeword length}
+
+\begin{question}{Main Theorems/Ideas in the lecture}
+The first theorem bounds the expected length of an optimal code. It states:
+\begin{theorem} Let $l_1*,\ldots, l_m*$ be optimal codeword lengths of a source distribution $p$ and $D-$ary alphabet, and let $L*$ be the associated expected length of an optimal code. Then,
+\begin{gather*}
+    H_D(X) \leq L*\leq H_D(X) + 1
+\end{gather*}
+\end{theorem}
+This tell us that the expected length of an optimal code for a $D-$ary alphabet will never be better than the entropy base $D$ of the random variable, but can be no worse than the entropy plus $1$.
+
+We then discussed a motivating example on a sequence of symbols.
+
+\begin{theorem}
+    The minimum expected codeword legnth per symbol satisfies
+    \begin{gather*}
+        \frac{H(X_1, \ldots, X_n)}{n} \leq L_n* < \frac{H(X_1, \ldots, X_n)}{n} + \frac{1}{n}
+    \end{gather*}
+    Moreover, if $X_1, \ldots, X_n$ is a stationary stochastic process,
+    \begin{gather*}
+        L_*\to H(\chi)
+    \end{gather*}
+\end{theorem}
+This is similar to the previous theorem, but for sequences of variables rather. It gives us bounds on the expected codeword length PER symbol which consists of the sample mean of the entropy of each random variable from the sequence and $\frac{1}{n}$ added onto the upper bound. Note that as $n$ grows, $\frac{1}{n}$ decreases, as we would expect. It then tells us that $L_n*$ converges to the entropy rate. 
+
+We now discuss what would happen to the expected description length if the code has an assumed distribution that differs from the true underlying distribution. Intuitively, we would expect it to be larger. We consider the Shannon code assignment $l(x) = \lceil \log \frac{1}{q(x)} \rceil$ designed for the probability mass function $q(x)$. Suppose that the true pmf is $p(x)$.
+\begin{theorem}
+    The expected length under $p(x)$ of the code assignment $l(x) = \lceil \log \frac{1}{q(x)}\rceil$ satisfies
+    \begin{gather*}
+        H(p) + D(p||q) \leq E_pl(x) \leq H(p) = + D(p||q) + 1
+    \end{gather*}
+\end{theorem}
+This is very similar to Theorem 1 with the relative entropy between $p$ and $q$ added on as a sort of error term. Note that this is only certainly true for the Shannon code assignment described above. Otherwise it may or may not be.
+
+We now circle back to discussing types of desirable code. Specifically, we talk about uniquely decodable code. This next theorem is the uniquely decodable version of the Kraft Inequality for prefix code. In fact, it is exaclty the same, but is established on uniquely decodable codes rather than just prefix codes. This is especially useful because uniquely decodable code is a larger class than prefix code that contains all of prefix code. In this section, we prove that the class of uniquely decodable codes does not offer any further possibilities for the set of codeword length than do instantaneous codes. In lecture we gave Karush's proof for the theorem.
+
+\begin{theorem}[McMillan's Inequality]
+    The codeword lengths of any uniquely decodable $D-$ary code must satisfy the Kraft Inequality. That is,
+    \begin{gather*}
+        \sum D^{-l_i} \leq 1
+    \end{gather*}
+    where $l_i$ is the length of the $i^{th}$ codeword. Conversely, given a set of codeword lengths that satisfy this inequality, it is possible to construct a uniquely decodable code with these codeword lengths.
+\end{theorem}
+\vspace{5cm}
+
+\end{question}
+
+\begin{question}{Materials that I find confusing or need more clarification/examples}
+
+\vspace{3cm}
+
+\end{question}
+
+\begin{question}{Class journal questions (if there are any in the lecture handout)}
+\begin{enumerate}
+    \item Show that $H(p) + D(p||q) \leq E_p{l(x)}$.
+    \begin{proof}
+    Consider, 
+    \begin{gather*}
+        E_pl(x) = \sum_{x\in \chi} p(x) \lceil \log \frac{1}{q(x)} \rceil \geq \sum_{x\in \chi}p(x)\log \frac{1}{q(x)} 
+    \end{gather*}
+    And by definition, 
+    \begin{gather*}
+        D(p||q) = \sum_{x\in\chi}p(x)\log\frac{p(x)}{q(x)} = -H(p) - \sum_{x\in\chi} p(x)\log q(x)
+    \end{gather*}
+    So therefore,
+    \begin{gather*}
+        D(p||q) + H(p) = -\sum_{x\in\chi} p(x)\log q(x) = \sum_{x\in\chi}p(x)\log\frac{1}{q(x)} \leq E_pl(x)
+    \end{gather*}
+    Thus, 
+    $$ D(p||q) + H(p) \leq E_pl(x) $$
+    \end{proof}
+\end{enumerate}
+\end{question}
+
+\vspace*{6cm}
+
+\begin{question}{Additional comments/suggestions about the lecture or the instructor}
+
+% {\color{blue}
+
+% \begin{enumerate}
+%     \item Said too many `Ok's.
+%     \item Speak slower.
+% \end{enumerate}
+
+% }
+
+\end{question}
+
+
+
+
+\end{document}

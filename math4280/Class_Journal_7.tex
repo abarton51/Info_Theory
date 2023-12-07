@@ -1,0 +1,178 @@
+\documentclass{article}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]%
+{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm, amsmath, amssymb, tikz}
+\usepackage{enumitem}
+\usepackage{xifthen}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,
+linkcolor=blue,citecolor=blue,
+urlcolor=blue]{hyperref}
+
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=grey!10]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\usetikzlibrary{calc,shapes, backgrounds}
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{\color{red} Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{open}{\color{red} Open Question}
+
+
+%Question template----------------------------------------
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.5em}%
+        \noindent{\bf \large#2}%
+    \vspace{0.5em} \hrule \vspace{.10in}%
+    \addtocounter{questionCounter}{1}%
+}{}
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+
+
+\begin{document}
+
+
+\begin{center}
+{\Huge Class Journal 7}\\
+\end{center}
+
+\vspace{5mm}
+
+\noindent {\large Lecture Handout \#7:}
+
+\vspace{5mm}
+
+\noindent {\large Topic of the lecture: Asymptotic Equipartition Property and Data Compression}
+
+\begin{question}{Main Theorems/Ideas in the lecture}
+The Law of Large Numbers. It is a theorem that describes how the sample mean of a random sample behaves for increasing number of random samples, provided that they are independent and identically distributed. Specifically, if $X_1,\ldots, X_n$ is a random sample of i.i.d. random variables, then the sample mean $\frac{1}{n}\sum_{i=1}^n X_i$ is close to $E[X_1]$ for sufficiently large $n$.
+
+The Asymptomatic Equipartition Property is the information theory analogue of this law of large numbers. In lamen terms, it states that for i.i.d. random variables, the sample entropy $\frac{1}{n}\log \Big( \frac{1}{p(X_1,\ldots, X_n)} \Big)$ is 'close' to the true entropy $H(X_1)$.
+
+A key idea behind AEP is that it allows us to divide the set of all sequences into two sets. A \emph{typical set}, where the sample entropy is close to the true entropy, and a \emph{non-typical set} containg sequences that are not.
+
+An important remark to be said about this: Any property that is proved for the typical sequences will then be true with high probability and will determine
+the average behavior of a large sample.
+
+\begin{definition} \textbf{(Convergence of random variables)} Given a sequence of random variables $X_1, X_2, \ldots, $, we say that the sequence $X_1, X_2, \ldots,$ converges to a random variable: 
+\begin{enumerate}
+    \item (In probability): $\Pr(|X_n - X| > \epsilon) \to 0$ for every $\epsilon > 0$
+    \item (In mean squares): $E[(X_n - X)^2]\to 0$
+    \item (With probability $1$/ Almost surely): $\Pr(\lim_{n\to\infty}X_n = X) = 1$
+\end{enumerate}\end{definition}
+
+\textbf{See Class Journal Question.}
+
+\begin{theorem} \textbf{(AEP)} If $X_1, X_2, \ldots, $ are i.i.d. random variables with probability mass function $p(x)$, then 
+\begin{gather*}
+    -\frac{1}{n}\log p(X_1, \ldots, X_n) \to H(X_1) = H(X)
+\end{gather*}
+in probability. 
+\end{theorem}
+Note we specified $H(X) = H(X_1)$ but it could be any of the $X_i$ since they are i.i.d. Also notice the specific type of convergence in AEP.
+
+\begin{definition}
+    The \textbf{typical set} $A_\epsilon^{(n)}$ with respect to $p(x)$ is the set of sequences $(x_1, \ldots, x_n)\in \chi^n$ with the property that \begin{gather*}
+        2^{-n(H(X) + \epsilon)} \leq p(x_1, \ldots, x_n) \leq 2^{-n(H(X) - \epsilon)}
+    \end{gather*}
+\end{definition}
+
+\begin{theorem}
+    The following statements are true:
+    \begin{enumerate}
+        \item If $(x_1, \ldots, x_n)\in A_{\epsilon}^{(n)}$, then $H(X) - \epsilon\leq -\frac{1}{n}p(x_1, \ldots, x_n)\leq H(X) + \epsilon$
+        \item $\Pr(X_{\epsilon}^{(n)}) > 1 - \epsilon$ for $n$ sufficiently large.
+        \item $|A_{\epsilon}^{(n)}|\leq 2^{n(H(X)+\epsilon)}$
+        \item $|A_\epsilon^{(n)}|\geq (1 - \epsilon)2^{n(H(X) - \epsilon)}$
+    \end{enumerate}
+\end{theorem}
+\newpage
+
+We then moved onto Data Compression.
+
+\textbf{Goal:} Goal: Let $X_1, X_2,\ldots, X_n$ be independent, identically distributed random variables drawn from the probability mass function $p(x)$. We wish to find short descriptions for such sequences of random variables.
+
+AEP allows us to do good things with compressing the amount of bits needed to encode data. Use one bit to set
+\begin{itemize}
+    \item Typical set $A_\epsilon^{(n)}$: Since there are NO MORE than $2^{n(H(X) + \epsilon)}$ sequences, then indexing requires no more than $n[H(X) + \epsilon] + 1$ bits.
+    \item Non-typical set: Since there are AT MOST $|\chi|^n$ sequences, then indexing requires no more than $n\log|\chi| + 1$ bits.
+\end{itemize}
+
+Suppose $x^n = (x_1, x_2, \ldots, x_n)$. Let $l(x^n)$ denote the length of the code word for $x^n$.
+
+\begin{theorem}
+    Let $X^n$ be i.i.d.$\sim p(x)$. Then there exists a code that maps sequence $x^n$ of length $n$ into binary strings such that the mapping is one-to-one and \begin{gather*}
+        E[\frac{1}{n}l(X^n)] \leq H(X) + \epsilon
+    \end{gather*}
+    for sufficiently large $n$.
+\end{theorem}
+What is this saying? Basically, the sample mean of the necessary code length of sequences $X^n$ can get close to the entropy of $X$, where $X$ is just any $X_i$, with sufficiently large $n$.
+
+
+\vspace{5cm}
+
+\end{question}
+
+\begin{question}{Materials that I find confusing or need more clarification/examples}
+I think I understand the part on indexing sequences in the non-typical set, but is that as good as we can do? I don't recall if we can. Since the typical set and non-typical set partition the set of all sequences, why can't we subtract off the number of bits needed to encode the typical set sequences? The number of bits we made to form an upper bound for the necessary amount of encode all non-typical sequences seems too large to me but I'm not entirely sure if it makes sense to make it smaller with what I just said.
+\vspace{3cm}
+
+\end{question}
+
+\begin{question}{Class journal questions (if there are any in the lecture handout)}
+
+\textbf{Class Journal Question 1.} Do a literature research online. Draw a simple diagram or write a few sentences
+summarizing which property implies which property.\newline
+
+\begin{tikzpicture}[node distance=1cm]
+\node (convmeansqer) [startstop] {2. Convergence in mean squares};
+\node (convprob) [startstop, below of=convmeansqer, yshift=-0.5cm, xshift=2.5cm] {3. Convergence in Probability};
+\node (almostsure) [startstop, right of=convmeansqer, xshift=5cm] {3. Converge Almost Surely};
+\draw [arrow] (convmeansqer) -- (convprob);
+\draw [arrow] (almostsure) -- (convprob);
+\end{tikzpicture}\smallskip
+
+This picture states that convergence in mean squared error and almost sure convergence (convergence with probability $1$) both imply convergence in probability, however they do not imply each other. It should be noted that all of these imply convergence in distribution.
+
+\end{question}
+
+\vspace*{6cm}
+
+\begin{question}{Additional comments/suggestions about the lecture or the instructor}
+
+% {\color{blue}
+
+% \begin{enumerate}
+%     \item Said too many `Ok's.
+%     \item Speak slower.
+% \end{enumerate}
+
+% }
+
+\end{question}
+
+
+
+
+\end{document}

@@ -1,0 +1,164 @@
+\documentclass[10pt,twoside]{article}
+\usepackage{amssymb, amsmath, enumitem, amsthm, amsfonts, epsfig, graphicx, dsfont,
+  bbm, bbold, url, color, setspace, multirow, pinlabel}
+\usepackage[all]{xy}
+
+\usepackage{fancyhdr} \setlength{\voffset}{-1in}
+\setlength{\topmargin}{0in} \setlength{\textheight}{9.5in}
+\setlength{\textwidth}{6.5in} \setlength{\hoffset}{0in}
+\setlength{\oddsidemargin}{0in} \setlength{\evensidemargin}{0in}
+\setlength{\marginparsep}{0in} \setlength{\marginparwidth}{0in}
+\setlength{\headsep}{0.25in} \setlength{\headheight}{0.5in}
+\pagestyle{fancy}
+
+\input{macros}
+
+\newcommand{\Pro}{\ensuremath{\mathbb{P}}}
+\newcommand{\condPro}[2]{\ensuremath{\mathbb{P}}(#1 $|$ #2)}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+
+\onehalfspace
+
+\fancyhead[LO,LE]{MATH 4280 - Information Theory - Professor Wang} \fancyhead[RO,RE]{Due 01/29/2023 at 11:59 pm}
+\chead{\textbf{}} \cfoot{}
+\fancyfoot[LO,LE]{} \fancyfoot[RO,RE]{Page \thepage\ of
+  \pageref{LastPage}} \renewcommand{\footrulewidth}{0.5pt}
+\parindent 0in
+% ------------------------------------------------------%
+% -------------------Begin Document---------------------%
+% ------------------------------------------------------%
+\begin{document}
+
+\begin{center}
+\huge{\bf{Homework 1} - Austin Barton}
+\end{center}
+
+\medskip
+
+\noindent \large{\textbf{Collaborators: N/A}}
+
+\medskip
+
+\begin{itemize}
+    \item\textbf{Problem 1:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{enumerate}
+        \item 
+    \begin{proof}[Answer.] Since this is a fair coin, the probability that it will be heads is $\frac{1}{2}$. Recall the geometric distribution. In essence, it is the discrete probability distribution that describes the probability of success occurring for the first time after $k$ attempts. Since $X$ denotes the the number of flips required to get a heads, it takes on values in the positive integers (clearly, you can't get heads with $0$ flips). Further, the value that $X$ takes on represents the number of attempts required in order to get heads or success. Thus,
+    $X\sim Geo(\frac{1}{2})$. 
+
+    Now to find the entropy of $X$. let $\chi$ represent the sample space of $X$. Let $p(x)$ represent the probability mass function of $X$ evaluated at $x$. Using the formula for entropy,
+    \begin{gather*}
+        H(X) = -\sum_{x\in\chi}p(x)\log(p(x)) = -\sum_{k=1}^\infty \Pro(X = k)\log(\Pro(X = k)) \\
+        = -\sum_{k=1}^\infty (1/2)^{k-1}(1/2)\log((1/2)^{k-1}(1/2)) = -\sum_{k=1}^\infty  2^{-k}\log(2^{-k}) \\
+        = \sum_{k=1}^\infty 2^{-k}k = \frac{2}{(1-2)^2} = 2
+    \end{gather*}
+    Thus, $H(X) = 2$ bits.
+    \end{proof}
+    \item \begin{proof}[Answer.]
+        Since $X\sim Geo(1/2)$ and the pmf of $X$ is $p(k) = (\frac{1}{2})^k$ for $k\in\Z^+$, we can see that as $k$ increase so does the probability that $X$ takes on the value $k$. We should start asking questions that have a higher probability of being yes and then iterate over each possible question in a manner such that the probability of it being yes decreases. Clearly, $2^{-k}$ is a strictly decreasing function of $k\in\Z^+$. Thus, we should ask the question: Is $X$ equal to $1$? Then: Is $X$ equal to $2$? And so on, in the natural ordering of the positive integers. If we let $i$ be the number of questions asked in order to determine $X$, we see that we start at $1$ question and ask if $X$ is $1$. If it is yes then we are done, otherwise, we use $2$ questions in total and ask if $X$ is 2. We continue this pattern of asking $i$ questions where the $i^{th}$ question asks if $X$ is $i$. The expected number of questions is then,
+        \begin{gather*}
+            \sum_{i=1}^\infty i2^{-i} = \frac{2}{(1-2)^{-2}} = 2
+        \end{gather*}
+        Thus, the expected number of questions needed in order to determine $X$ is $2$, which exactly matches $H(X)$.
+    \end{proof}
+    
+    \end{enumerate}
+
+    \newpage
+    
+    \item\textbf{Problem 2:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.]
+    The entropy of $\mathbf{p}$ is $H(\mathbf{p}) = \sum_{i=1}^n p_i\log(\frac{1}{p_i})$. $\frac{1}{p_i}\geq 1$ since each $0\leq p_i\leq 1$. And $\log$ is a strictly increasing function over the domain of all positive real numbers. So $\log(\frac{1}{p_i})\geq 0$. Since each $p_i\geq 0$, we have that for each $i$, $p_i\log(\frac{1}{p_i})\geq 0$.
+
+    As defined in the book, even though $\log$ is not defined at $0$, we, by convention, defined $\log(0)$ as $0$. Rewriting, $p_i\log(\frac{1}{p_i})$ as $-p_i\log(p_i)$, we see that since $-p_i\log(p_i)\geq 0$, we will achieve the minimum for $p_i$ such that it evaluates to $0$.
+
+    Clearly, $-p_i\log(p_i)=0$ for $p_i=0,1$. And so, $\mathbf{p}$ achieves this minimum if its components are any combination of $0,1$. Let $S=\set{\mathbf{p}: \text{for $i=1,\ldots, n$ } p_i=0,1}$
+    
+    Then $S$ contains every $\mathbf{p}$ such that $H(\mathbf{p}$ is minimized. Note that not every $v\in S$ is linearly independent.
+    
+    \end{proof}
+    
+    \item\textbf{Problem 3:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.]
+    Consider, 
+    \begin{gather*}
+        H(X, g(X)) = H(X) + H(g(X)|X)
+    \end{gather*}
+    $H(g(X)|X) = 0$ since if $X$ is known then their is no uncertainty in what $g(X)$ is. Mathematically this is shown by,
+    \begin{gather*}
+        H(g(X)|X) = -\sum_x p(g(x),x)\log(p(g(x)|x)) = -\sum_x p(g(x),x)\log(1) \\
+        H(g(X) | X) = 0
+    \end{gather*}
+    where we used the fact that $p(g(x)|x) = 1$. Thus, we have shown that\newline $H(X,g(X)) = H(X)$.
+
+    Now, consider,
+    \begin{gather*}
+        H(X,g(X)) = H(g(X)) + H(X|g(X))
+    \end{gather*}
+    $H(X|g(X))$ can have non-zero entropy however. Since, in certain cases, there are more than $1$ $X$'s that satisfy $g(X) = Y$. Consider,
+    \begin{gather*}
+        H(X|g(X)) = -\sum_x p(x,g(x))\log(p(x|g(x)))
+    \end{gather*}
+    Now, $0\leq p(x|g(X)) \leq 1$. And this is less than one for functions such that there are more than one $x$'s that satisfy $g(x) = y$. For example, if $g(x) = x^2$. Then either $x=-1$ or $x=1$ if $g$ is defined over the domain of all real numbers. Thus, given $g(x)$, it is possible so that $p(1|1)$ and $p(-1|1)$ are both non-zero and less than $1$.
+
+    Therefore, $\log(p(x|g(x))\leq 0$ and so $\log(\frac{1}{p(x|g(x))})\geq 0$. And $p(x,g(x))\geq 0$. Thus,
+    \begin{gather*}
+        H(X|g(X)) =  -\sum_x p(x,g(x))\log(p(x|g(x))) = \sum_x p(x,g(x))\log(\frac{1}{p(x|g(x))}) \geq 0
+    \end{gather*}
+    Since $H(X|g(X))\geq 0$, we have that $H(X,g(X)) = H(g(X)) + H(X|g(X)) \geq H(g(X))$. Putting this all together, we have shown that,
+    \begin{gather*}
+    H(X,g(X)) = H(X) + H(g(X)|X) = H(X)  \\
+    H(X,g(X)) = H(g(X)) + H(X|g(X))\geq H(g(X))\end{gather*}
+    \end{proof}
+    
+    \item\textbf{Problem 4:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.]
+    Assume for the sake of contradiction that $H(Y|X) = 0$ and $Y$ is not a function of $X$. Equivalently, that is, there exists $x$, call it $x_0$, with
+    $p(x_0)>0$ and $y_1,y_2$ such that $p(x_0,y_1)>0$ and $p(x_0,y_2)>0$.
+
+    Then, \begin{gather*}
+        H(Y|X) = -\sum_{x,y} p(x,y)\log p(y|x) \\
+        \geq -p(x_0,y_1)\log p(y_1|x_0) - p(x_0,y_2)\log p(y_2|x_0)
+    \end{gather*}
+    But $p(x_0,y_1) = p(y_1|x_0)p(x_0) > 0$. Thus, $p(y_1|x_0)>0$. And $p(x_0,y_2)= p(y_2|x_0)p(x_0)>0$, thus, $p(y_2|x_0)>0$. Since both $p(y_1|x_0)>0$ and $p(y_2|x_0)>0$, then we must have that $p(y_1|x_0),p(y_2|x_0)<1$. Therefore, $\log p(y_1|x_0) < 0$ and $\log p(y_2|x_0) < 0$. And therefore, this implies that
+    \begin{gather*}
+        -p(x_0,y_1)\log p(y_1|x_0) - p(x_0,y_2)\log p(y_2|x_0) > 0
+    \end{gather*}
+    That is,
+    \begin{gather*}
+        H(Y|X) > 0
+    \end{gather*}
+    A contradiction.
+
+    Therefore, we have shown that if $H(Y|X) = 0$, then $Y$ is a function of $X$.
+    \end{proof}
+
+\newpage
+    
+    \item\textbf{Problem 5:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.]
+    \begin{enumerate}[label=(\alph*.)]
+        \item 
+    Let $\Omega = \set{X_1,X_2}$. By direct calculation,
+    \begin{gather*}
+        H(X) = -\sum_{x\in\Omega}p(x)\log(p(x))
+    \end{gather*}
+    $X_1$ is supported over the set $\set{1,\ldots, m}$ and $X_2$ is supported over the set $\set{m+1,\ldots, n}$. Summing over $x\in\Omega$ is equivalently to summing over each $x$ in $X_1$ support and $X_2$ support. However, those random variables occur with probabilities $\alpha$ and $1-\alpha$ respectively. Rewriting $H(X)$ as,
+    \begin{gather*}
+        H(X) = -\sum_{i=1}^m \alpha p_1(i)\log (\alpha p_1(i)) - \sum_{j=m+1}^n(1-\alpha) p_2(j)\log ((1-\alpha)p_2(j))  \\
+        = -\alpha \sum_{i=1}^m p_1(i) (\log\alpha + \log p_1(i)) - (1-\alpha)\sum_{j=m+1}^n p_2(j)(\log(1-\alpha) + \log p_2(j)) \\
+        = \alpha \log \alpha + \alpha H(X_1) + (1-\alpha)\log(1-\alpha) + (1-\alpha)H(X_2)
+    \end{gather*}
+
+    \item 
+     \end{enumerate}
+    \end{proof}
+\end{itemize}
+
+\label{LastPage}
+\end{document}

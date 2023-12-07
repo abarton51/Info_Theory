@@ -1,0 +1,124 @@
+\documentclass[10pt,twoside]{article}
+\usepackage{amssymb, amsmath, amsthm, amsfonts, epsfig, graphicx, dsfont, pdfpages, bbold, url, color, setspace, multirow, pinlabel}
+\usepackage[all]{xy}
+
+\usepackage{fancyhdr} \setlength{\voffset}{-1in}
+\setlength{\topmargin}{0in} \setlength{\textheight}{9.5in}
+\setlength{\textwidth}{6.5in} \setlength{\hoffset}{0in}
+\setlength{\oddsidemargin}{0in} \setlength{\evensidemargin}{0in}
+\setlength{\marginparsep}{0in} \setlength{\marginparwidth}{0in}
+\setlength{\headsep}{0.25in} \setlength{\headheight}{0.5in}
+\pagestyle{fancy}
+
+\input{macros}
+
+\newcommand{\Pro}{\ensuremath{\mathbb{P}}}
+\newcommand{\condPro}[2]{\ensuremath{\mathbb{P}}(#1 $|$ #2)}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+
+\onehalfspace
+
+\fancyhead[LO,LE]{{MATH 4280 - Information Theory - Professor Wang} \fancyhead[RO,RE]{Due 0X/XX/2023 at 11:59 pm}}
+\chead{\textbf{}} \cfoot{}
+\fancyfoot[LO,LE]{} \fancyfoot[RO,RE]{Page \thepage\ of
+  \pageref{LastPage}} \renewcommand{\footrulewidth}{0.5pt}
+\parindent 0in
+% ------------------------------------------------------%
+% -------------------Begin Document---------------------%
+% ------------------------------------------------------%
+\begin{document}
+
+\begin{center}
+\huge{\bf{Homework 5} - Austin Barton}
+\end{center}
+
+\medskip
+
+\noindent \large{\textbf{Collaborators: N/A}}
+
+\medskip
+
+\begin{itemize}
+    \item\textbf{Problem 1:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.] 
+    \includepdf[pages={1-}, scale=0.75]{infohw5q1.pdf}
+    \end{proof}
+    
+    \item\textbf{Problem 2:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \includepdf[pages={1-}, scale=0.75]{infohw5q2.pdf}
+    \begin{proof}[Answer.]
+    
+    \end{proof}
+    
+    \item\textbf{Problem 3:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer to 1)]
+    We know that $X_1, \ldots, X_n$ are independent. Thus, $H(X_1, \ldots, X_n) = \sum_{i=1}^n H(X_i)$. For each $X_i$, we know that we can achieve an optimal code using Huffman encoding. Let $L_i$ be the expected code length for $X_i$ from the Huffman encoding. By definition of optimal code, this means that 
+    \begin{gather*}
+        H(X_i) \leq L_i \leq H(X_i) + 1
+    \end{gather*}
+    So, if $L$ is the expected number of questions for $X_1, \ldots, X_n$, because each $X_i$ is independent, we know that $L = \sum_{i=1}^n L_i$. Therefore, a lower bound on the minimum average number of questions for $X_1, \ldots, X_n$ is 
+    \begin{gather*}
+        \sum_{i=1}^n H(X_i) \leq \sum_{i=1}^n L_i = L
+    \end{gather*}
+    \end{proof}
+
+    \begin{proof}[Answer to 2)]
+       Assuming it takes us a sequence of $n$ questions in order to answer our questions, the last question should be asking if the least reliable object is good. By least reliable, we mean the object with the smallest corresponding $p_i$ in the set of $p_i>1/2$, for $i=1,\ldots, n$. In this case, we are splitting into two sets. One of which consists of sequences of answered questions encoding whether or not an object is bad where the least reliable object is good, and the other set being the sequences of answered questions encoding whether or not an object is bad where the least reliable object is bad.
+    \end{proof}
+
+    \begin{proof}[Answer to 3]
+        Since the entropy of each $X_i$ is max when $H(X_i)=1/2$, we know that
+        \begin{gather*}
+            H(X_1, \ldots, X_n) =\sum_{i=1}^n H(X_i) \leq n\cdot H(1/2) = n
+        \end{gather*}
+        Let $L^*$ be the minimum average number of questions required. We know that $L^*$ must satisfy,
+        \begin{gather*}
+            L^* \leq n
+        \end{gather*}
+    \end{proof}
+
+\newpage
+    
+    \item\textbf{Problem 4:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \begin{proof}[Answer.]
+     Let $X$ be a random variable with alphabet $\chi = \set{0, 1}$ and let $D= \set{0,1}$ be the alphabet to form the encoding of $X$. Let $\Pro(X = 1) = 1 - \delta$ where $\delta\in [0, 1]$. As $\delta \to 0$, $\Pro(X = 1)\to 1$ and thus, $H(X)\to 0$. Let $L$ be the expected code length of the optimal code of $X$, we can easily construct a binary encoding of $X$ (say $0$ for $X=1$ and $1$ for $X=0$ for example) with,
+     \begin{gather*}
+         L = 1\cdot \Pro(X = 1) + 1\cdot \Pro(X=0)
+     \end{gather*} As $\delta\to 0$, $L\to 1$ since $\Pro(X=1)\to 1$ and $\Pro(X=0)\to 0$. That is, for every $\epsilon > 0$, there exists $\delta$ such that if $|\Pro(X=1) - 1|\leq \delta$, then 
+     \begin{gather*}
+         |L - 1|< \epsilon \\
+         \Rightarrow -\epsilon < L - 1 < \epsilon \\
+         \Rightarrow 1 - \epsilon < L
+     \end{gather*}.% In other words, for every $\epsilon_L$ there exists $\delta$ such that,
+     %\begin{gather*}
+       %  -\epsilon_L \leq L - 1 \leq \epsilon_L \\
+      %   \Rightarrow 1 - \epsilon\leq L \leq 1 + \epsilon
+     %\end{gather*}     
+     
+     We know that any optimal code satisfies the inequality,
+     \begin{gather*}
+         H(X) \leq L \leq H(X) +1
+     \end{gather*}
+     and as $\delta \to 0$, $H(X)\to 0$.
+     Thus, for every $\epsilon > 0$, there exists a $\delta > 0$ such that if $|\Pro(X=1) - 1| < \delta$ then
+     \begin{gather*}
+         H(X) + 1 - \epsilon < L
+     \end{gather*}
+     since $H(X) + 1 - \epsilon\to 1$ and we previously showed that $L\to 1$.
+     %and as $\delta \to 0$, we have that $L\to 1$ and $H(X)\to 0$. Or in other words, for every $\epsilon > 0$, there exists a $\delta > 0$ such that if $|\Pro(X=1) - 1|\leq \delta$ then $|L - H(X) + 1| \leq \epsilon$. Which shows that 
+    \end{proof}
+    
+    \item\textbf{Problem 5:} \newline
+    \noindent\makebox[\linewidth]{\rule{18cm}{0.4pt}}
+    \includepdf[pages={1-}, scale=0.75]{infohw5q5.pdf}
+    \begin{proof}[Answer.]
+    
+    \end{proof}
+\end{itemize}
+
+\label{LastPage}
+\end{document}

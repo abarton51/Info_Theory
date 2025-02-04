@@ -1,11 +1,12 @@
-# An Overview of Information Theory for Classification Tasks in Machine Learning
+# Cross Entropy as a Loss Function for Classification Tasks
 
-This paper from the ground up covers:
-- Entropy
+This short paper on information theory from the ground up covers:
+- Entropy, Conditional Entropy, Mutual Entropy
 - Mutual information
 - KD Divergence/Relative Entropy
 - Cross Entropy
 - Statistical significance
+- Interpretation
 - Use in machine learning classification tasks
 
 ## Math 4280

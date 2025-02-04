@@ -10,4 +10,4 @@ This paper from the ground up covers:
 
 ## Math 4280
 
-In addition to my paper information thory for classification, I provide a directory of solutions and notes from a course in Information Theory.
+In addition to my paper information thory for classification, I provide a directory of solutions and notes from a course in Information Theory found at `./math4280`

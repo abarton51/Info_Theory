@@ -5,8 +5,7 @@ This short paper on information theory from the ground up covers:
 - Mutual information
 - KD Divergence/Relative Entropy
 - Cross Entropy
-- Statistical significance
-- Interpretation
+- Interpretation and significance
 - Use in machine learning classification tasks
 
 ## Math 4280
